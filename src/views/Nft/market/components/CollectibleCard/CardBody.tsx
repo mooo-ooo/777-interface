@@ -24,7 +24,7 @@ const CollectibleCardBody: React.FC<CollectibleCardProps> = ({ nft, nftLocation,
   return (
     <NftCard p="8px" type={type}>
       <NFTMedia as={PreviewImage} nft={nft} height={320} width={320} mb="8px" borderRadius="8px" />
-      <img className="star" src={`/images/nfts/star-${star}.png`} alt="star" />
+      <img className={`star-${star} star`} src={`/images/nfts/star-${star}.png`} alt="star" />
       <Flex className="name" justifyContent="center" width="100%" flexDirection="column" alignItems="center" height="52px">
         {currentAskPrice && <CostLabel mt="4px" cost={currentAskPrice} bnbBusdPrice={bnbBusdPrice} />}
         <Text as="p" fontSize={currentAskPrice ? "14px" : "18px"} fontFamily="shark-game">
@@ -51,6 +51,24 @@ const NftCard = styled(CardBody)<{type: string}>`
     top: 23px;
     width: 44px;
     right: 32px;
+  }
+  .star-1{
+    top: 9px;
+    width: 77px;
+    right: 15px;
+  }
+  .star-2{
+    width: 51px;
+    right: 27px;
+  }
+  .star-3{
+    width: 51px;
+    right: 27px;
+  }
+  .star-4{
+    width: 51px;
+    right: 27px;
+    top: 20px;
   }
 `
 
