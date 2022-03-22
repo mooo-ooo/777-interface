@@ -54,7 +54,7 @@ const TopBannerContainer = styled.div<{ height: number }>`
 const BodyWrapper = styled(Box)`
   position: relative;
   display: flex;
-  background: radial-gradient(103.12% 50% at 50% 50%,#21193A 0%,#191326 100%);
+  background: #141416;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;

@@ -91,7 +91,7 @@ const BuyModal: React.FC<BuyModalProps> = ({ nftToBuy, onDismiss }) => {
     onConfirm: () => {
       const payAmount = Number.isNaN(nftPrice) ? Zero : parseUnits(nftToBuy.marketData.currentAskPrice)
       if (paymentCurrency === PaymentCurrency.BNB) {
-        return callWithGasPrice(nftMarketContract, 'buyTokenUsingBNB', [nftToBuy.collectionAddress, nftToBuy.tokenId], {
+        return callWithGasPrice(nftMarketContract, 'buyTokenUsingBNB', [nftToBuy.collectionAddress, nftToBuy.tokenId, nftToBuy.hash], {
           value: payAmount,
         })
       }
@@ -99,6 +99,7 @@ const BuyModal: React.FC<BuyModalProps> = ({ nftToBuy, onDismiss }) => {
         nftToBuy.collectionAddress,
         nftToBuy.tokenId,
         payAmount,
+        nftToBuy.hash
       ])
     },
     onSuccess: async ({ receipt }) => {
