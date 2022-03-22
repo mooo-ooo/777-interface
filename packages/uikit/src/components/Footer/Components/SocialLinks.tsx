@@ -7,7 +7,7 @@ import Link from "../../Link/Link";
 import { socials } from "../config";
 
 const SocialLinks: React.FC<FlexProps> = ({ ...props }) => (
-  <Flex {...props}>
+  <Flex {...props} alignItems="center">
     {socials.map((social, index) => {
       const iconProps = {
         width: "20px",
@@ -28,7 +28,7 @@ const SocialLinks: React.FC<FlexProps> = ({ ...props }) => (
         );
       }
       return (
-        <Link external key={social.label} href={social.href} aria-label={social.label} mr={mr}>
+        <Link height="23px" external key={social.label} href={social.href} aria-label={social.label} mr={mr}>
           <Icon {...iconProps} />
         </Link>
       );

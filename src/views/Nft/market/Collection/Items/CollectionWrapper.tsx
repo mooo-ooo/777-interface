@@ -12,7 +12,7 @@ interface CollectionWrapperProps {
 
 const CollectionWrapper: React.FC<CollectionWrapperProps> = ({ collection }) => {
   return (
-    <Box py="32px">
+    <Box py="32px" minHeight="calc(100vh - 270px)">
       <Container px={[0, null, '24px']}>
         <Filters collection={collection} />
       </Container>

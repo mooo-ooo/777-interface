@@ -55,6 +55,13 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     fillIcon: NftFillIcon,
     items: []
   },
+  {
+    label: t('Play Game'),
+    href: '/game',
+    icon: NftIcon,
+    fillIcon: NftFillIcon,
+    items: []
+  },
 ]
 
 export default config
