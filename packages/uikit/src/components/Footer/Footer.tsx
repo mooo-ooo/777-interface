@@ -10,7 +10,7 @@ const MenuItem: React.FC<FooterProps> = ({
 }) => {
   return (
     <StyledFooter p={["40px 16px", null, "56px 40px 32px 40px"]} {...props} justifyContent="space-around">
-      <img src="/images/text-logo.png" alt="logo"/>
+      <img src="/images/logo-text.png" alt="logo"/>
       <StyledSocialLinks order={[2]} pb={["42px", null, "32px"]} mb={["0", null, "32px"]} />
     </StyledFooter>
   );
