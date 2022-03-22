@@ -12,7 +12,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({ items = [], activeItem, activeSub
       {items.map(({ label, items: menuItems = [], href, icon }) => {
         const statusColor = menuItems?.find((menuItem) => menuItem.status !== undefined)?.status?.color;
         const isActive = activeItem === href;
-        const linkProps = isTouchDevice() && menuItems && menuItems.length > 0 ? {} : { href };
+        const linkProps = isTouchDevice() && menuItems && menuItems.length > 0 ? {} : { href, target: href.includes('http') ? '_blank' : '_self' };
         const Icon = icon;
         return (
           <DropdownMenu key={`${label}#${href}`} items={menuItems} py={1} activeItem={activeSubItem}>

@@ -12,42 +12,6 @@ export type ConfigMenuItemsType = MenuItemsType & { hideSubNav?: boolean }
 const fishingGunAddress = getFishingGunAddress()
 
 const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
-  // {
-  //   label: t('Earn'),
-  //   href: '/farms',
-  //   icon: EarnIcon,
-  //   fillIcon: EarnFillIcon,
-  //   items: [
-  //     {
-  //       label: t('Farms'),
-  //       href: '/farms',
-  //     },
-  //     {
-  //       label: t('Pools'),
-  //       href: '/pools',
-  //     },
-  //   ],
-  // },
-  // {
-  //   label: t('Win'),
-  //   href: '/prediction',
-  //   icon: TrophyIcon,
-  //   fillIcon: TrophyFillIcon,
-  //   items: [
-  //     {
-  //       label: t('Trading Competition'),
-  //       href: '/competition',
-  //     },
-  //     {
-  //       label: t('Prediction (BETA)'),
-  //       href: '/prediction',
-  //     },
-  //     {
-  //       label: t('Lottery'),
-  //       href: '/lottery',
-  //     },
-  //   ],
-  // },
   {
     label: t('Marketplace'),
     href: `${nftsBaseUrl}/collections/${fishingGunAddress}`,
@@ -57,7 +21,7 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   },
   {
     label: t('Play Game'),
-    href: '/game',
+    href: 'https://demo.cryptokillshark.io',
     icon: NftIcon,
     fillIcon: NftFillIcon,
     items: []
