@@ -27,9 +27,11 @@ const float = keyframes`
 
 const Container = styled.div`
   position: relative;
+  width: 96px;
+  height: 96px;
 `;
 
-const RotatingPancakeIcon = styled(PancakeIcon)`
+const RotatingPancakeIcon = styled.img`
   position: absolute;
   top: 0;
   left: 0;
@@ -37,16 +39,16 @@ const RotatingPancakeIcon = styled(PancakeIcon)`
   transform: translate3d(0, 0, 0);
 `;
 
-const FloatingPanIcon = styled(PanIcon)`
-  animation: ${float} 6s ease-in-out infinite;
+const FloatingPanIcon = styled.img`
+  animation: ${float} 3s ease-in-out infinite;
   transform: translate3d(0, 0, 0);
 `;
 
-const Spinner: React.FC<SpinnerProps> = ({ size = 128 }) => {
+const Spinner: React.FC<SpinnerProps> = ({ size = 256 }) => {
   return (
     <Container>
-      <RotatingPancakeIcon width={`${size * 0.5}px`} />
-      <FloatingPanIcon width={`${size}px`} />
+      <FloatingPanIcon src="/images/loading.png" width={`${size * 0.7}px`} height={`${size * 0.7}px`} />
+      {/* <FloatingPanIcon width={`${size}px`} /> */}
     </Container>
   );
 };

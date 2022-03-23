@@ -1,7 +1,7 @@
 import { useWeb3React } from '@web3-react/core'
 import { useRouter } from 'next/router'
 import { NftProfileLayout } from 'views/Nft/market/Profile'
-import SubMenu from 'views/Nft/market/Profile/components/SubMenu'
+import { Text } from '@pancakeswap/uikit'
 import UnconnectedProfileNfts from 'views/Nft/market/Profile/components/UnconnectedProfileNfts'
 import UserNfts from 'views/Nft/market/Profile/components/UserNfts'
 import useNftsForAddress from 'views/Nft/market/hooks/useNftsForAddress'
@@ -19,7 +19,7 @@ const NftProfilePage = () => {
 
   return (
     <>
-      <SubMenu />
+      <Text mb="32px" fontFamily="shark-game" fontSize="26px" color="#F40F82" textTransform="uppercase">NFT Gun cards</Text>
       {isConnectedProfile ? (
         <UserNfts
           nfts={nfts}

@@ -1,25 +1,20 @@
 import { FC } from 'react'
 import { useRouter } from 'next/router'
 import { isAddress } from 'utils'
-import { Box, Flex, Text } from '@pancakeswap/uikit'
+import { Flex, Text } from '@pancakeswap/uikit'
 import Page from 'components/Layout/Page'
 import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
 import MarketPageHeader from '../components/MarketPageHeader'
 import ProfileHeader from './components/ProfileHeader'
 import NoNftsImage from '../components/Activity/NoNftsImage'
-import TabMenu from './components/TabMenu'
 
-const TabMenuWrapper = styled(Box)`
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 0%);
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    left: auto;
-    transform: none;
-  }
+const PageStyled = styled.div`
+  background: url('/images/nfts/bg-02.png');
+  min-height: calc(100vh - 267px);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 `
 
 const NftProfile: FC = ({ children }) => {
@@ -42,27 +37,24 @@ const NftProfile: FC = ({ children }) => {
             isProfileLoading={false}
           />
         </MarketPageHeader>
-        <Page style={{ minHeight: 'auto' }}>
-          <Flex p="24px" flexDirection="column" alignItems="center">
-            <NoNftsImage />
-            <Text textAlign="center" maxWidth="420px" pt="8px" bold>
-              {t('Please enter a valid address, or connect your wallet to view your profile')}
-            </Text>
-          </Flex>
-        </Page>
+        <PageStyled>
+          <Page style={{ minHeight: 'auto' }}>
+            <Flex p="24px" flexDirection="column" alignItems="center">
+              <NoNftsImage />
+              <Text textAlign="center" maxWidth="420px" pt="8px" bold>
+                {t('Please enter a valid address, or connect your wallet to view your profile')}
+              </Text>
+            </Flex>
+          </Page>
+        </PageStyled>
       </>
     )
   }
 
   return (
-    <>
-      <MarketPageHeader position="relative">
-        <TabMenuWrapper>
-          <TabMenu />
-        </TabMenuWrapper>
-      </MarketPageHeader>
+    <PageStyled>
       <Page style={{ minHeight: 'auto' }}>{children}</Page>
-    </>
+    </PageStyled>
   )
 }
 

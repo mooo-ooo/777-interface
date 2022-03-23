@@ -27,7 +27,7 @@ const CollectibleCardBody: React.FC<CollectibleCardProps> = ({ nft, nftLocation,
       <img className={`star-${star} star`} src={`/images/nfts/star-${star}.png`} alt="star" />
       <Flex className="name" justifyContent="center" width="100%" flexDirection="column" alignItems="center" height="52px">
         {currentAskPrice && <CostLabel mt="4px" cost={currentAskPrice} bnbBusdPrice={bnbBusdPrice} />}
-        <Text as="p" fontSize={currentAskPrice ? "14px" : "18px"} fontFamily="shark-game">
+        <Text textTransform="uppercase" as="p" fontSize={currentAskPrice ? "14px" : "18px"} fontFamily="shark-game">
           {name}
         </Text>
       </Flex>

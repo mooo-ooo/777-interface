@@ -71,7 +71,7 @@ const NFTMedia: FC<
 }
 
 const GunStyled = styled(RoundedImage)`
-  background-size: 70%;
+  background-size: 55%;
   background-position: center 50%;
 `
 
