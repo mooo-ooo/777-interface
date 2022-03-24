@@ -29,16 +29,14 @@ const NftProfile: FC = ({ children }) => {
             isProfileLoading={false}
           />
         </MarketPageHeader>
-        <PageStyled>
-          <Page style={{ minHeight: 'auto' }}>
-            <Flex p="24px" flexDirection="column" alignItems="center">
-              <NoNftsImage />
-              <Text textAlign="center" maxWidth="420px" pt="8px" bold>
-                {t('Please enter a valid address, or connect your wallet to view your profile')}
-              </Text>
-            </Flex>
-          </Page>
-        </PageStyled>
+        <Page style={{ minHeight: 'auto' }}>
+          <Flex p="24px" flexDirection="column" alignItems="center">
+            <NoNftsImage />
+            <Text textAlign="center" maxWidth="420px" pt="8px" bold>
+              {t('Please enter a valid address, or connect your wallet to view your profile')}
+            </Text>
+          </Flex>
+        </Page>
       </>
     )
   }
