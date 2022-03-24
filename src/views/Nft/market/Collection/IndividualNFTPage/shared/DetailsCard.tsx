@@ -63,7 +63,7 @@ const DetailsCard: React.FC<DetailsCardProps> = ({ contractAddress, ipfsJson, co
       )}
     </Box>
   )
-  return <ExpandableCard title={t('Details')} icon={<SearchIcon width="24px" height="24px" />} content={content} />
+  return <ExpandableCard title={t('NFT Details')} icon={<SearchIcon width="24px" height="24px" />} content={content} />
 }
 
 export default DetailsCard

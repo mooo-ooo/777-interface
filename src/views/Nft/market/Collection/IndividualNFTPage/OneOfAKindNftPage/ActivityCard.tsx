@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { Flex, Card, Text, useMatchBreakpoints, Table, Th, ArrowBackIcon, ArrowForwardIcon } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
 import { Activity, NftToken } from 'state/nftMarket/types'
-import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
+import { useBNBVsBusdPrice } from 'hooks/useBUSDPrice'
 import { useAppDispatch } from '../../../../../../state'
 import TableLoader from '../../../../../../components/TableLoader'
 import { Arrow, PageButtons } from '../../../components/PaginationButtons'
@@ -26,7 +27,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ nft }) => {
   const [activitiesSlice, setActivitiesSlice] = useState<Activity[]>([])
   const [sortedTokenActivities, setSortedTokenActivities] = useState<Activity[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const bnbBusdPrice = useBNBBusdPrice()
+  const bnbBusdPrice = useBNBVsBusdPrice()
   const { isXs, isSm } = useMatchBreakpoints()
 
   useEffect(() => {
@@ -83,17 +84,17 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ nft }) => {
         <>
           <Table>
             <thead>
-              <tr>
-                <Th textAlign="center"> {t('Event')}</Th>
+              <tr style={{ height: 72 }}>
+                <StyledTh textAlign="center"> {t('Event')}</StyledTh>
                 {isXs || isSm ? null : (
                   <>
-                    <Th textAlign="right"> {t('Price')}</Th>
-                    <Th textAlign="center"> {t('From')}</Th>
-                    <Th textAlign="center"> {t('To')}</Th>
+                    <StyledTh textAlign="right"> {t('Price')}</StyledTh>
+                    <StyledTh textAlign="center"> {t('From')}</StyledTh>
+                    <StyledTh textAlign="center"> {t('To')}</StyledTh>
                   </>
                 )}
-                <Th textAlign="center"> {t('Date')}</Th>
-                {isXs || isSm ? null : <Th />}
+                <StyledTh textAlign="center"> {t('Date')}</StyledTh>
+                {isXs || isSm ? null : <StyledTh />}
               </tr>
             </thead>
 
@@ -145,5 +146,9 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ nft }) => {
     </Card>
   )
 }
+
+const StyledTh = styled(Th)`
+  color: #1FC7D4
+`
 
 export default ActivityCard

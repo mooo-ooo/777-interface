@@ -59,7 +59,8 @@ const NFTMedia: FC<
   }
 
   return (
-    <GunStyled
+    <RoundedImage
+      className="gun"
       width={width}
       height={height}
       src={nft?.image.gif || nft?.image.thumbnail}
@@ -69,10 +70,5 @@ const NFTMedia: FC<
     />
   )
 }
-
-const GunStyled = styled(RoundedImage)`
-  background-size: 55%;
-  background-position: center 50%;
-`
 
 export default NFTMedia

@@ -1,7 +1,7 @@
 import { ChainId, Currency, currencyEquals, JSBI, Price } from '@pancakeswap/sdk'
 import tokens, { mainnetTokens } from 'config/constants/tokens'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { multiplyPriceByAmount } from 'utils/prices'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
 import { PairState, usePairs } from './usePairs'
@@ -95,5 +95,22 @@ export const useBUSDCakeAmount = (amount: number): number | undefined => {
 
 export const useBNBBusdPrice = (): Price | undefined => {
   const bnbBusdPrice = useBUSDPrice(tokens.wbnb)
+  return bnbBusdPrice
+}
+
+export const useBNBVsBusdPrice = (): number | undefined => {
+  const [bnbBusdPrice, setBnbBusdPrice] = useState()
+  useEffect(() => {
+    const fetchBNBBusdPrice = async () => {
+      const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT').catch((err) => err)
+      if (res.ok) {
+        const { price } = await res.json()
+        setBnbBusdPrice(price)
+      } else {
+        setBnbBusdPrice(undefined)
+      }
+    }
+    fetchBNBBusdPrice()
+  }, [])
   return bnbBusdPrice
 }

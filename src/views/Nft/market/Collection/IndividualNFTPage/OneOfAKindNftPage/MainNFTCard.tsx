@@ -1,9 +1,9 @@
+import { useMemo } from 'react'
 import { BinanceIcon, Box, Button, Card, CardBody, Flex, Skeleton, Text, useModal } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
-
+import { useBNBVsBusdPrice } from 'hooks/useBUSDPrice'
+import styled from "styled-components";
 import { NftToken } from 'state/nftMarket/types'
-import { multiplyPriceByAmount } from 'utils/prices'
 import { formatNumber } from 'utils/formatBalance'
 import NFTMedia from 'views/Nft/market/components/NFTMedia'
 import BuyModal from '../../../components/BuySellModals/BuyModal'
@@ -20,10 +20,25 @@ interface MainNFTCardProps {
 
 const MainNFTCard: React.FC<MainNFTCardProps> = ({ nft, isOwnNft, nftIsProfilePic, onSuccess }) => {
   const { t } = useTranslation()
-  const bnbBusdPrice = useBNBBusdPrice()
+  const bnbBusdPrice = useBNBVsBusdPrice()
+
+  const type = useMemo(() => {
+    const { value } = nft.attributes.find(({ traitType }) => traitType === "Type") || { value: 'common'}
+    return String(value).toLowerCase()
+  }, [nft])
+
+  const star = useMemo(() => {
+    const { value } = nft.attributes.find(({ traitType }) => traitType === "Star") || { value: 1}
+    return Number(value)
+  }, [nft])
+
+  const ammo = useMemo(() => {
+    const { value } = nft.attributes.find(({ traitType }) => traitType === "Ammo") || { value: 1}
+    return Number(value)
+  }, [nft])
 
   const currentAskPriceAsNumber = nft.marketData?.currentAskPrice ? parseFloat(nft.marketData.currentAskPrice) : 0
-  const priceInUsd = multiplyPriceByAmount(bnbBusdPrice, currentAskPriceAsNumber)
+  const priceInUsd = bnbBusdPrice * currentAskPriceAsNumber
   const [onPresentBuyModal] = useModal(<BuyModal nftToBuy={nft} />)
   const [onPresentSellModal] = useModal(
     <SellModal variant={nft.marketData?.isTradable ? 'edit' : 'sell'} nftToSell={nft} onSuccessSale={onSuccess} />,
@@ -45,7 +60,7 @@ const MainNFTCard: React.FC<MainNFTCardProps> = ({ nft, isOwnNft, nftIsProfilePi
   )
 
   return (
-    <Card mb="40px">
+    <CardWrapper mb="40px">
       <CardBody>
         <Container flexDirection={['column-reverse', null, 'row']}>
           <Flex flex="2">
@@ -56,6 +71,7 @@ const MainNFTCard: React.FC<MainNFTCardProps> = ({ nft, isOwnNft, nftIsProfilePi
               <Text fontSize="40px" bold mt="12px">
                 {nft.name}
               </Text>
+              {[...Array(star || []).keys()].map((key) => <img key={key} src="/images/nfts/star.svg" alt="star" />)}
               {nft.description && <Text mt={['16px', '16px', '48px']}>{t(nft.description)}</Text>}
               <Text color="textSubtle" mt={['16px', '16px', '48px']}>
                 {t('Price')}
@@ -100,13 +116,55 @@ const MainNFTCard: React.FC<MainNFTCardProps> = ({ nft, isOwnNft, nftIsProfilePi
               )}
             </Box>
           </Flex>
-          <Flex flex="2" justifyContent={['center', null, 'flex-end']} alignItems="center" maxWidth={440}>
+          <WithBackground type={type} flex="2" justifyContent={['center', null, 'flex-end']} alignItems="center" maxWidth={440}>
             <NFTMedia key={nft.tokenId} nft={nft} width={440} height={440} />
-          </Flex>
+            <Stat>
+              <Flex width="100%" justifyContent="space-around">
+                <Text fontFamily="shark-game" textTransform="uppercase">Ammo</Text>
+                <Text fontFamily="shark-game" textTransform="uppercase">{ammo}</Text>
+              </Flex>
+              <Flex mt="12px" width="100%" justifyContent="space-around">
+                <Text fontFamily="shark-game" textTransform="uppercase">Power</Text>
+                <Text fontFamily="shark-game" textTransform="uppercase">800</Text>
+              </Flex>
+            </Stat>
+          </WithBackground>
         </Container>
       </CardBody>
-    </Card>
+    </CardWrapper>
   )
 }
+
+const Stat = styled(Flex)`
+  width: 100%;
+  bottom: 15%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+`
+
+const CardWrapper = styled(Card)`
+  background: rgba(28,30,54,.4);
+  border-radius: 24px;
+`
+
+const WithBackground = styled(Flex)<{type: string}>`
+  background: ${({ type }) => `url('/images/nfts/${type}-raw.png')`};
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 0px;
+  aspect-ratio: 2/2.4;
+  .gun {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 60%;
+      transform: translate(0px, -10%);
+      left: unset;
+    }
+  }
+`
 
 export default MainNFTCard

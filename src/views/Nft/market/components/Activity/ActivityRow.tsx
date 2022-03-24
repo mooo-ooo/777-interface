@@ -7,15 +7,13 @@ import {
   Link,
   OpenNewIcon,
   useMatchBreakpoints,
-  useModal,
   Skeleton,
 } from '@pancakeswap/uikit'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Activity, NftToken } from 'state/nftMarket/types'
-import { Price } from '@pancakeswap/sdk'
+import ProfileCell from 'views/Nft/market/components/ProfileCell'
 import { getBscScanLink } from 'utils'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import MobileModal from './MobileModal'
 import ActivityPrice from './ActivityPrice'
 import ActivityEventText from './ActivityEventText'
 import { nftsBaseUrl, pancakeBunniesAddress } from '../../constants'
@@ -24,7 +22,7 @@ import NFTMedia from '../NFTMedia'
 interface ActivityRowProps {
   activity: Activity
   nft: NftToken
-  bnbBusdPrice: Price
+  bnbBusdPrice: number
   isUserActivity?: boolean
   isNftActivity?: boolean
 }
@@ -47,15 +45,7 @@ const ActivityRow: React.FC<ActivityRowProps> = ({
     hour: 'numeric',
     minute: 'numeric',
   })
-  const [onPresentMobileModal] = useModal(
-    <MobileModal
-      nft={nft}
-      activity={activity}
-      localeTimestamp={localeTimestamp}
-      bnbBusdPrice={bnbBusdPrice}
-      isUserActivity={isUserActivity}
-    />,
-  )
+
   const isPBCollection = nft ? nft.collectionAddress.toLowerCase() === pancakeBunniesAddress.toLowerCase() : false
   const tokenId =
     nft && isPBCollection
@@ -65,7 +55,7 @@ const ActivityRow: React.FC<ActivityRowProps> = ({
       : null
 
   return (
-    <tr {...((isXs || isSm) && { onClick: onPresentMobileModal })} data-test="nft-activity-row">
+    <tr {...((isXs || isSm))} data-test="nft-activity-row">
       {!isNftActivity ? (
         <Td
           {...((isXs || isSm) && {
@@ -119,7 +109,7 @@ const ActivityRow: React.FC<ActivityRowProps> = ({
           <Td>
             <ActivityPrice price={priceAsFloat} bnbBusdPrice={bnbBusdPrice} />
           </Td>
-          {/* {isUserActivity ? (
+          {isUserActivity ? (
             <Td>
               <Flex justifyContent="center" alignItems="center">
                 {activity.otherParty ? <ProfileCell accountAddress={activity.otherParty} /> : '-'}
@@ -138,7 +128,7 @@ const ActivityRow: React.FC<ActivityRowProps> = ({
                 </Flex>
               </Td>
             </>
-          )} */}
+          )}
         </>
       )}
       <Td>

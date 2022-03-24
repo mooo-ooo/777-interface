@@ -25,16 +25,10 @@ import {
   TokenMarketData,
   Transaction,
   AskOrder,
-  NftAttribute,
   ApiTokenFilterResponse,
   MarketEvent,
 } from './types'
 import { getBaseNftFields, getBaseTransactionFields, getCollectionBaseFields } from './queries'
-
-/**
- * API HELPERS
- */
-
 
 /**
  * Fetch all collections data by combining data from the API (static metadata) and the Subgraph (dynamic market data)
@@ -108,6 +102,7 @@ export const getNftApi = async (
     const thumbnail = `${IPFS_GATEWAY}/${json.image}`
     const result = {
       ...json,
+      attributes: nomalizeAttributes(json.attributes),
       tokenId,
       hash,
       image: {
@@ -142,7 +137,7 @@ export const getNftsFromDifferentCollectionsApi = async (
       collectionName: sharkCollections[from[index].collectionAddress]?.name,
       collectionAddress: from[index].collectionAddress,
       description: res.description,
-      attributes: nomalizeAttributes(res.attributes),
+      attributes: res.attributes,
       createdAt: res.createdAt,
       updatedAt: res.updatedAt,
       image: res.image,
@@ -231,7 +226,10 @@ export const getNftsFromCollectionSg = async (
       `,
       { collectionAddress: collectionAddress.toLowerCase(), skip, first },
     )
-    return res.collection.nfts
+    return res.collection.nfts.map(nft => ({
+      ...nft,
+      attributes: nomalizeAttributes(nft.attributes)
+    }))
   } catch (error) {
     console.error('Failed to fetch NFTs from collection', error)
     return []
@@ -296,7 +294,7 @@ export const getNftsMarketData = async (
           }
         }
       `,
-      { where, first, skip, orderBy, orderDirection },
+      { where: {...where, isTradable: true}, first, skip, orderBy, orderDirection },
     )
     
     return res.nfts
