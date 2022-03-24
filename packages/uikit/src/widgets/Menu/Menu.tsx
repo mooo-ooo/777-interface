@@ -54,7 +54,7 @@ const TopBannerContainer = styled.div<{ height: number }>`
 const BodyWrapper = styled(Box)`
   position: relative;
   display: flex;
-  background: #141416;
+  background-image: url('/images/nfts/bg-02.png');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;

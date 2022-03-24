@@ -9,14 +9,6 @@ import MarketPageHeader from '../components/MarketPageHeader'
 import ProfileHeader from './components/ProfileHeader'
 import NoNftsImage from '../components/Activity/NoNftsImage'
 
-const PageStyled = styled.div`
-  background: url('/images/nfts/bg-02.png');
-  min-height: calc(100vh - 267px);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-`
-
 const NftProfile: FC = ({ children }) => {
   const accountAddress = useRouter().query.accountAddress as string
   const { t } = useTranslation()
@@ -52,9 +44,7 @@ const NftProfile: FC = ({ children }) => {
   }
 
   return (
-    <PageStyled>
-      <Page style={{ minHeight: 'auto' }}>{children}</Page>
-    </PageStyled>
+    <Page style={{ minHeight: 'auto' }}>{children}</Page>
   )
 }
 

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Box, Flex } from "../Box";
 
 export const InlineMenuContainer = styled(Box)`
-  background: url('/images/nfts/bg.png');
   border-radius: ${({ theme }) => theme.radii.card};
   box-shadow: ${({ theme }) => theme.shadows.tooltip};
 `;
