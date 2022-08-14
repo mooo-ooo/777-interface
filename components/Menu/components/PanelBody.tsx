@@ -18,11 +18,7 @@ const Container = styled.div`
   border-radius: 5px;
   padding: 8px;
   margin: 8px;
-  background-color: #fcf6d5;
-  background: #fcf6d5;
-  background-color: rgba(252,246,213,0.7);
-  background: linear-gradient(-45deg,rgba(252,246,213,0.8) 33.33%, rgba(25,50,47,0.1) 33.33%, rgba(25,50,47,0.1) 50%, rgba(252,246,213,0.8) 50%, rgba(252,246,213,0.8) 83.33%, rgba(25,50,47,0.1) 83.33%, rgba(25,50,47,0.1) 100% );
-  background-size: 4px 4px;
+  background-color: #1d1d1d;
   box-shadow: 2px 3px 1rem rgb(25 50 48 / 20%);
 `
 

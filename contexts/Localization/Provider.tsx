@@ -27,7 +27,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     return {
       ...initialState,
-      currentLanguage: languages[codeFromStorage],
+      currentLanguage: languages[codeFromStorage] || EN,
     }
   })
   const { currentLanguage } = state

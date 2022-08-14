@@ -18,7 +18,7 @@ const StyledPanel = styled.div<{ isPushed: boolean; showMenu: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   flex-shrink: 0;
-  background: linear-gradient(#8ad0b8 25%, #cce6c9 70%, #fcf6d5);
+  background: #272727;
   box-shadow: 1rem 0 3rem rgb(25 50 47 / 20%);
   width: ${({ isPushed }) => (isPushed ? `${SIDEBAR_WIDTH_FULL}px` : 0)};
   height: 100%;
