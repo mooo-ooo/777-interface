@@ -1,6 +1,6 @@
 import React from 'react'
 import ThemeProvider from 'contexts/ThemeContext'
-import { LanguageProvider } from 'contexts/Localization'
+import { LanguageProvider } from 'contexts/Localization/Provider'
 
 const Providers: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
