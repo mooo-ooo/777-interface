@@ -1,18 +1,21 @@
 import React, { useState } from "react"
 import Image from 'next/image'
 import styled from "styled-components"
-import { Flex } from 'rebass'
+import { Flex, Button } from 'rebass'
 import Overlay from "components/Overlay/Overlay"
 import { useTranslation } from 'contexts/Localization'
 import Device from 'components/Device'
 import { languageList } from 'config/localization/languages'
+import useToken from 'hooks/useToken'
 import config, { MENU_HEIGHT, SIDEBAR_WIDTH_FULL } from './config'
 import Panel from "./components/Panel"
+import UserProfile from './components/UserProfile'
 
 const Menu: React.FC<{ children: React.ReactNode, isMobile: boolean }> = ({
   isMobile,
   children,
 }) => {
+  const { token, setToken, removeToken, getParsedToken } = useToken()
   const { currentLanguage, setLanguage, t } = useTranslation()
   const [isPushed, setIsPushed] = useState<boolean>(false)
   const [showMenu, setShowMenu] = useState(true)
@@ -30,7 +33,14 @@ const Menu: React.FC<{ children: React.ReactNode, isMobile: boolean }> = ({
             <TextMenu key={menu.label} href={menu.href}>{menu.label}</TextMenu>
           )}
         </MenuBody>
-        <Logo width="160px" height="30px" alt="logo" src="/images/icons/logo.svg" />
+        <Image width="160px" height="30px" alt="logo" src="/images/icons/logo.svg" />
+        {token
+          ? <UserProfile user={getParsedToken()} />
+          : <Flex>
+              <Button ml='8px' variant='secondary'>Login</Button>
+              <Button ml='8px' variant='secondary'>Join us</Button>
+          </Flex>
+        }
       </StyledNav>
       <BodyWrapper>
         {isPushed && <Panel
@@ -114,11 +124,6 @@ const MobileOnlyOverlay = styled(Overlay)`
 
 const MenuBody = styled(Flex)`
   gap: 16px;
-`
-
-const Logo = styled(Image)`
-cursor: pointer;
-
 `
 
 const TextMenu = styled.a`
