@@ -27,9 +27,10 @@ const Menu: React.FC<{ children: React.ReactNode, isMobile: boolean }> = ({
         <MenuBody alignItems="center">
           <ButtonBurger onClick={() => setIsPushed(prev => !prev)} width="52px" height="44px" alt="bugger" src="/images/icons/burger.png" />
           {menuConfig.map(menu => 
-            <a key={menu.label} href={menu.href}>{menu.label}</a>
+            <TextMenu key={menu.label} href={menu.href}>{menu.label}</TextMenu>
           )}
         </MenuBody>
+        <Logo width="160px" height="30px" alt="logo" src="/images/icons/logo.svg" />
       </StyledNav>
       <BodyWrapper>
         {isPushed && <Panel
@@ -112,5 +113,57 @@ const MobileOnlyOverlay = styled(Overlay)`
 `;
 
 const MenuBody = styled(Flex)`
-  gap: 8px;
+  gap: 16px;
+`
+
+const Logo = styled(Image)`
+cursor: pointer;
+
+`
+
+const TextMenu = styled.a`
+  position: relative;
+  color: #fff;
+  transition: .3s linear;
+  font-size: 14px;
+
+  &:before {
+    position: absolute;
+    opacity: 0;
+    right: -16px;
+    top: -14px;
+    background-position: bottom 0 right 0;
+    content: "";
+    height: 36px;
+    width: 65px;
+    background-image: url("images/icons/menu.svg");
+    background-repeat: no-repeat;
+    transition: .3s linear;
+  }
+  &:after {
+    position: absolute;
+    opacity: 0;
+    left: -16px;
+    bottom: -16px;
+    background-position: top 0 left 0;
+    transform: matrix(-1,0,0,1,0,0);
+    content: "";
+    height: 36px;
+    width: 65px;
+    background-image: url("images/icons/menu.svg");
+    transition: .3s linear;
+  }
+  background-repeat: no-repeat;
+  &:hover,:focus {
+    color: #ff004d;
+    text-shadow: 0 0 16px #ff004d;
+    &:before {
+      opacity: 1;
+      transform: translateY(-6px);
+    }
+    &::after {
+      opacity: 1;
+      transform: matrix(-1,0,0,1,0,0) translateY(6px)
+    }
+  }
 `
