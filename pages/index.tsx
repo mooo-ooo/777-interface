@@ -1,15 +1,10 @@
-import Head from 'next/head'
-import ReactHtmlParser from 'react-html-parser'
+import type { NextPage } from 'next'
+import Home from 'views/Home'
 
-export default function Home({ contents }: { contents: any }) {
+const HomePage: NextPage = () => {
   return (
-    <>
-      <Head>
-        { ReactHtmlParser (contents) }
-      </Head>
-      <main>
-        <div>Welcome</div>
-      </main>
-    </>
+    <Home />
   )
 }
+
+export default HomePage

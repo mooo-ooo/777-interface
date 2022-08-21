@@ -22,16 +22,6 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     icon: "SportsbookIcon",
     href: '/sportsbook',
   },
-  {
-    label: t('Prediction'),
-    icon: "PredictionIcon",
-    href: '/prediction',
-  },
-  {
-    label: t('Lottery'),
-    icon: "LotteryIcon",
-    href: '/lottery',
-  },
 ]
 
 export default config
