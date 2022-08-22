@@ -20,6 +20,7 @@ const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMo
   const [isPushed, setIsPushed] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState(true);
   const menuConfig = config(t);
+  const selectedLang =  languages[lang as keyof typeof languages]
 
   // Find the home link if provided
   const homeLink = menuConfig.find((link) => link.label === 'Home');
@@ -49,8 +50,8 @@ const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMo
             <Button variant="secondary">Sign In</Button>
             <Button variant="primary">Sign Up</Button>
             <LangBody onClick={() => setOpenDrowdown(!openDropdown)}>
-              <Image width="28px" height="28px" alt="language" src={`/images/icons/${languages[lang].code}.png`} />
-              <Text fontSize={1}>{languages[lang].language}</Text>
+              <Image width="28px" height="28px" alt="language" src={`/images/icons/${selectedLang.code}.png`} />
+              <Text fontSize={1}>{selectedLang.language}</Text>
               <DropdownIcon width="10x" height="10px" alt="dropdown" src="/images/icons/arrow_down.svg" priority={openDropdown} />
             </LangBody>
             {openDropdown &&
@@ -225,9 +226,7 @@ const Dropdown = styled.div`
 `
 
 const DropdownIcon = styled(Image)<{ priority: boolean }>`
-  ${({ priority }) => !priority} {
-    transform: rotateZ(180deg);
-  }
+  transform: ${({ priority }) => `${priority ? 'rotateZ(180deg)' : null}`};
 `
 
 const DropdownItem = styled.div`
