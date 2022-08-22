@@ -1,12 +1,11 @@
-import { Language } from 'components/Menu/types'
+import { Language } from 'components/Menu/types';
 
-export const EN: Language = { locale: 'en-US', language: 'English', code: 'en' }
-export const ID: Language = { locale: 'id-ID', language: 'Bahasa Indonesia', code: 'id' }
-
+export const EN: Language = { locale: 'en-US', language: 'English', code: 'en' };
+export const TH: Language = { locale: 'th-TH', language: 'ไทย', code: 'th' };
 
 export const languages = {
-  'en-US': EN,
-  'id-ID': ID,
-}
+    'en-US': EN,
+    'th-TH': TH,
+};
 
-export const languageList = Object.values(languages)
+export const languageList = Object.values(languages);

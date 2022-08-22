@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
-import { Flex } from 'rebass';
+import { Flex, Text } from 'rebass';
 import Overlay from 'components/Overlay/Overlay';
 import { useTranslation } from 'contexts/Localization';
 import Device from 'components/Device';
-import { languageList } from 'config/localization/languages';
+import { languageList, languages } from 'config/localization/languages';
 import useToken from 'hooks/useToken';
 import config, { MENU_HEIGHT, SIDEBAR_WIDTH_FULL } from './config';
 import Panel from './components/Panel';
@@ -14,6 +14,8 @@ import { Button } from 'components/Button';
 
 const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMobile, children }) => {
   const { token, setToken, removeToken, getParsedToken } = useToken();
+  const [openDropdown, setOpenDrowdown] = useState<boolean>(false)
+  const [lang, setLang] = useState<string>('en-US')
   const { currentLanguage, setLanguage, t } = useTranslation();
   const [isPushed, setIsPushed] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState(true);
@@ -44,12 +46,25 @@ const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMo
           <UserProfile user={getParsedToken()} />
         ) : (
           <ButtonBody>
-            <Button variant="secondary">
-              <span>Sign In</span>
-            </Button>
-            <Button variant="primary">
-              <span>Sign Up</span>
-            </Button>
+            <Button variant="secondary">Sign In</Button>
+            <Button variant="primary">Sign Up</Button>
+            <LangBody onClick={() => setOpenDrowdown(!openDropdown)}>
+              <Image width="28px" height="28px" alt="language" src={`/images/icons/${languages[lang].code}.png`} />
+              <Text fontSize={1}>{languages[lang].language}</Text>
+              <DropdownIcon width="10x" height="10px" alt="dropdown" src="/images/icons/arrow_down.svg" priority={openDropdown} />
+            </LangBody>
+            {openDropdown &&
+              <Dropdown>
+                <DropdownItem>
+                  {languageList.map((item: any) =>
+                    <LangContent key={item.code} onClick={() => { setLang(item.locale); setOpenDrowdown(!openDropdown) }}>
+                      <Image width="28px" height="28px" alt="language" src={`/images/icons/${item.code}.png`} />
+                      <Text fontSize={1}>{item.language}</Text>
+                    </LangContent>
+                  )}
+                </DropdownItem>
+              </Dropdown>
+            }
           </ButtonBody>
         )}
       </StyledNav>
@@ -141,6 +156,12 @@ const ButtonBody = styled(Flex)`
     gap: 16px;
 `;
 
+const LangBody = styled(Flex)`
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+`
+
 const TextMenu = styled.a`
     position: relative;
     color: #fff;
@@ -183,3 +204,42 @@ const TextMenu = styled.a`
         }
     }
 `;
+
+const Dropdown = styled.div`
+  transform: translateX(0px) translateY(0px);
+  position: absolute;
+  top: 71px;
+  right: 5px;
+  min-width: 130px;
+  box-shadow: 0 8px 12px 3px rgb(255 0 76 / 50%);
+  z-index: 30;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    height: 6px;
+    background: #1e1e1e;
+    width: 100%;
+  }
+`
+
+const DropdownIcon = styled(Image)<{ priority: boolean }>`
+  ${({ priority }) => !priority} {
+    transform: rotateZ(180deg);
+  }
+`
+
+const DropdownItem = styled.div`
+  position: relative;
+  width: 100%;
+  padding: 8px 24px 8px 24px;
+  background-color: #1d1d1d;
+`
+
+const LangContent = styled(Flex)`
+  margin-bottom: 12px !important;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+`
