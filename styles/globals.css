@@ -1,16 +1,10 @@
-@font-face {
-  font-family: "exo";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: optional;
-  src: url(/fonts/Exo2-Medium.ttf);
-}
+
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'exo', sans-serif;
+  font-family: 'Exo 2', sans-serif;
 }
 
 a {

@@ -150,7 +150,7 @@ const MobileOnlyOverlay = styled(Overlay)`
 `;
 
 const MenuBody = styled(Flex)`
-    gap: 16px;
+    gap: 32px;
 `;
 
 const ButtonBody = styled(Flex)`
@@ -164,46 +164,47 @@ const LangBody = styled(Flex)`
 `
 
 const TextMenu = styled.a`
-    position: relative;
-    color: #fff;
-    transition: 0.3s linear;
-    font-size: 14px;
+  position: relative;
+  color: #fff;
+  transition: 0.3s linear;
+  font-size: 14px;
+  font-weight: bold;
 
-    &:before,
-    &:after {
-        content: '';
-        height: 36px;
-        width: 65px;
-        position: absolute;
-        opacity: 0;
-        transition: 0.3s linear;
-        background-image: url('images/icons/hover_menu.svg');
-        background-repeat: no-repeat;
-    }
-    &:before {
-        right: -16px;
-        top: -14px;
-        background-position: bottom 0 right 0;
-    }
-    &:after {
-        left: -16px;
-        bottom: -16px;
-        background-position: top 0 left 0;
-        transform: matrix(-1, 0, 0, 1, 0, 0);
-    }
-    &:hover,
-    &:focus {
-        color: #ff004d;
-        text-shadow: 0 0 16px #ff004d;
-        &:before {
-            opacity: 1;
-            transform: translateY(-6px);
-        }
-        &:after {
-            opacity: 1;
-            transform: matrix(-1, 0, 0, 1, 0, 0) translateY(6px);
-        }
-    }
+  &:before,
+  &:after {
+      content: '';
+      height: 36px;
+      width: 65px;
+      position: absolute;
+      opacity: 0;
+      transition: 0.3s linear;
+      background-image: url('images/icons/hover_menu.svg');
+      background-repeat: no-repeat;
+  }
+  &:before {
+      right: -16px;
+      top: -14px;
+      background-position: bottom 0 right 0;
+  }
+  &:after {
+      left: -16px;
+      bottom: -16px;
+      background-position: top 0 left 0;
+      transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+  &:hover,
+  &:focus {
+      color: #ff004d;
+      text-shadow: 0 0 16px #ff004d;
+      &:before {
+          opacity: 1;
+          transform: translateY(-6px);
+      }
+      &:after {
+          opacity: 1;
+          transform: matrix(-1, 0, 0, 1, 0, 0) translateY(6px);
+      }
+  }
 `;
 
 const Dropdown = styled.div`

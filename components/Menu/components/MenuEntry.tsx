@@ -23,6 +23,7 @@ const LinkLabel = styled.div<{ isPushed: boolean, isActive?: boolean }>`
   transition: color 0.4s;
   flex-grow: 1;
   font-size: 1.7rem;
+  font-weight: bold;
 `;
 
 const MenuEntry = styled.div<Props>`

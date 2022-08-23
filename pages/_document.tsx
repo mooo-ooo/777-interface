@@ -37,12 +37,10 @@ export default class MyDocument extends Document {
     return(
       <Html lang="en">
         <Head>
-          <link
-            rel="preload"
-            href="/fonts/Exo2-Medium.ttf"
-            as="font"
-            crossOrigin="anonymous"
-          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet"/>
+          <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;800&display=swap" rel="stylesheet" />
           {/* <!-- Start of LiveChat (www.livechatinc.com) code --> */}
           {/* <script
             dangerouslySetInnerHTML={{
