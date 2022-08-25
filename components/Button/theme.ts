@@ -16,20 +16,23 @@ export const scaleVariants = {
     },
 };
 
-export const styleVariants = {
+export const styleVariants: any = {
     [variants.PRIMARY]: {
         backgroundColor: '#00ffc2',
         color: '#151d24',
-        shadow: '0 0 12px #00ffc2',
-        backgroundBorder: `url("/images/icons/border_button_primary.svg")`,
+        colorActive: '#151d24',
+        backgroundButton: '#00ffc2',
         backgroundHover: `url("/images/icons/hover_button_primary.svg")`,
-        filter: 'drop-shadow(0 0 6px #00FFC2)',
+        filter: 'drop-shadow(0 0 8px #00FFC2)',
         filterHover: 'drop-shadow(0 0 14px #00FFC2)',
     },
     [variants.SECONDARY]: {
-        backgroundColor: '#00ffc2',
-        color: '#fff',
+        backgroundColor: '#ffffff',
+        color: '#ffffff',
+        colorActive: '#151d24',
+        backgroundButton: 'transparent',
         backgroundHover: `url("/images/icons/hover_button_secondary.svg")`,
-        filter: 'drop-shadow(0 0 32px #fff)',
+        filter: 'drop-shadow(0 0 14px #fff)',
+        filterHover: 'drop-shadow(0 0 14px #fff)',
     },
 };

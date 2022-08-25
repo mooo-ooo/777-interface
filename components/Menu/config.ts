@@ -4,28 +4,51 @@ import { ContextApi } from 'contexts/Localization/types';
 const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     {
         label: t('Home'),
-        icon: 'HomeIcon',
+        icon: 'home',
         href: '/',
     },
     {
         label: t('Slots'),
-        icon: 'SlotsIcon',
+        icon: 'slots',
         href: '/slots',
     },
     {
         label: t('Live Casino'),
-        icon: 'CasinoIcon',
+        icon: 'casino',
         href: '/casino',
     },
     {
         label: t('Sportsbook'),
-        icon: 'SportsbookIcon',
+        icon: 'sportsbook',
         href: '/sportsbook',
     },
     {
         label: t('E-Sports'),
-        icon: 'SportsbookIcon',
+        icon: 'esports',
         href: '/esports',
+    },
+];
+
+export const subMenu: (t: ContextApi['t']) => MenuEntry[] = (t) => [
+    {
+        label: t('Promotions'),
+        icon: 'promotions',
+        href: '/promotions',
+    },
+    {
+        label: t('Shop'),
+        icon: 'shop',
+        href: '/shop',
+    },
+    {
+        label: t('VIP Levels'),
+        icon: 'vip_levels',
+        href: '/vip-levels',
+    },
+    {
+        label: t('FAQ'),
+        icon: 'faq',
+        href: '/faq',
     },
 ];
 

@@ -7,9 +7,10 @@ import { useTranslation } from 'contexts/Localization';
 import Device from 'components/Device';
 import { languageList, languages } from 'config/localization/languages';
 import useToken from 'hooks/useToken';
-import config, { MENU_HEIGHT, SIDEBAR_WIDTH_FULL } from './config';
+import config, { subMenu, MENU_HEIGHT, SIDEBAR_WIDTH_FULL } from './config';
 import Panel from './components/Panel';
 import UserProfile from './components/UserProfile';
+import Sidebar from './components/Sidebar';
 import { Button } from 'components/Button';
 
 const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMobile, children }) => {
@@ -20,7 +21,8 @@ const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMo
   const [isPushed, setIsPushed] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState(true);
   const menuConfig = config(t);
-  const selectedLang =  languages[lang as keyof typeof languages]
+  const subMenuConfig = subMenu(t)
+  const selectedLang = languages[lang as keyof typeof languages]
 
   // Find the home link if provided
   const homeLink = menuConfig.find((link) => link.label === 'Home');
@@ -28,24 +30,40 @@ const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMo
   return (
     <Wrapper>
       <StyledNav showMenu={showMenu}>
-        <MenuBody alignItems="center">
-          <ButtonBurger
-            onClick={() => setIsPushed((prev) => !prev)}
-            width="52px"
-            height="44px"
-            alt="bugger"
-            src="/images/icons/burger.png"
-          />
-          {menuConfig.map((menu) => (
-            <TextMenu key={menu.label} href={menu.href}>
-              {menu.label}
-            </TextMenu>
-          ))}
-        </MenuBody>
-        <Image width="160px" height="30px" alt="logo" src="/images/icons/logo.svg" />
+        {!isMobile ?
+          <>
+            <MenuBody alignItems="center">
+              <ButtonBurger
+                onClick={() => setIsPushed((prev) => !prev)}
+                width="52px"
+                height="44px"
+                alt="bugger"
+                src="/images/icons/burger.png"
+              />
+              {menuConfig.map((menu) => (
+                <TextMenu key={menu.label} href={menu.href}>
+                  {menu.label}
+                </TextMenu>
+              ))}
+            </MenuBody>
+            <Logo width="160px" height="30px" alt="logo" src="/images/icons/logo.svg" />
+          </>
+          :
+          <MenuBody alignItems="center">
+            <ButtonBurger
+              onClick={() => setIsPushed((prev) => !prev)}
+              width="52px"
+              height="44px"
+              alt="bugger"
+              src="/images/icons/burger.png"
+            />
+            <Logo width="160px" height="30px" alt="logo" src="/images/icons/logo.svg" />
+          </MenuBody>
+        }
         {token ? (
           <UserProfile user={getParsedToken()} />
         ) : (
+          !isMobile &&
           <ButtonBody>
             <Button variant="secondary">Sign In</Button>
             <Button variant="primary">Sign Up</Button>
@@ -67,10 +85,11 @@ const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMo
               </Dropdown>
             }
           </ButtonBody>
+
         )}
       </StyledNav>
       <BodyWrapper>
-        {isPushed && (
+        {/* {isPushed && (
           <Panel
             isPushed={isPushed}
             isMobile={isMobile}
@@ -81,8 +100,9 @@ const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMo
             pushNav={setIsPushed}
             links={menuConfig}
           />
-        )}
-        <Inner isPushed={isPushed} showMenu={showMenu}>
+        )} */}
+        <Sidebar menu={menuConfig} subMenu={subMenuConfig} isPushed={isPushed} setIsPushed={setIsPushed}/>
+        <Inner isPushed={isPushed} showMenu={showMenu} >
           {children}
         </Inner>
         <MobileOnlyOverlay show={isPushed} onClick={() => setIsPushed(false)} role="presentation" />
@@ -148,6 +168,10 @@ const MobileOnlyOverlay = styled(Overlay)`
         display: none;
     }
 `;
+
+const Logo = styled(Image)`
+
+`
 
 const MenuBody = styled(Flex)`
     gap: 32px;
@@ -226,7 +250,7 @@ const Dropdown = styled.div`
   }
 `
 
-const DropdownIcon = styled(Image)<{ priority: boolean }>`
+const DropdownIcon = styled(Image) <{ priority: boolean }>`
   transform: ${({ priority }) => `${priority ? 'rotateZ(180deg)' : null}`};
 `
 
