@@ -105,7 +105,7 @@ const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMo
         <Inner isPushed={isPushed} showMenu={showMenu} >
           {children}
         </Inner>
-        <Overlay show={isPushed} onClick={() => setIsPushed(false)} role="presentation" />
+        <BackgroundOverlay show={isPushed} onClick={() => setIsPushed(false)} role="presentation" />
       </BodyWrapper>
     </Wrapper>
   );
@@ -161,7 +161,7 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
     }
 `;
 
-const Overlay = styled(Overlay) <{ show: boolean }>`
+const BackgroundOverlay = styled(Overlay) <{ show: boolean }>`
     position: fixed;
     height: 100%;
     display:  ${({ show }) => show ? 'block' : 'none'};
