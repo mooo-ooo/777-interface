@@ -101,11 +101,11 @@ const Menu: React.FC<{ children: React.ReactNode; isMobile: boolean }> = ({ isMo
             links={menuConfig}
           />
         )} */}
-        <Sidebar menu={menuConfig} subMenu={subMenuConfig} isPushed={isPushed} setIsPushed={setIsPushed}/>
+        <Sidebar menu={menuConfig} subMenu={subMenuConfig} selectedLang={selectedLang} languageList={languageList} isPushed={isPushed} setIsPushed={setIsPushed} setLang={setLang}/>
         <Inner isPushed={isPushed} showMenu={showMenu} >
           {children}
         </Inner>
-        <MobileOnlyOverlay show={isPushed} onClick={() => setIsPushed(false)} role="presentation" />
+        <Overlay show={isPushed} onClick={() => setIsPushed(false)} role="presentation" />
       </BodyWrapper>
     </Wrapper>
   );
@@ -161,12 +161,14 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
     }
 `;
 
-const MobileOnlyOverlay = styled(Overlay)`
+const Overlay = styled(Overlay) <{ show: boolean }>`
     position: fixed;
     height: 100%;
-    ${({ theme }) => theme.mediaQueries.sm} {
-        display: none;
-    }
+    display:  ${({ show }) => show ? 'block' : 'none'};
+    opacity: 0.6;
+    z-index: 20;
+    background: #13010f;
+    transition: .3s linear;
 `;
 
 const Logo = styled(Image)`

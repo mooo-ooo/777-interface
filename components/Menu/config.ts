@@ -56,5 +56,5 @@ export default config;
 
 export const MENU_HEIGHT = 68;
 export const MENU_ENTRY_HEIGHT = 40;
-export const SIDEBAR_WIDTH_FULL = 200;
+export const SIDEBAR_WIDTH_FULL = 320;
 export const SIDEBAR_WIDTH_REDUCED = 64;

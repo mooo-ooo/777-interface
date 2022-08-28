@@ -54,4 +54,7 @@ export interface SidebarProps {
     subMenu: Array<MenuEntry>;
     isPushed: boolean;
     setIsPushed: (push: boolean) => void;
+    setLang: (value: string) => void;
+    languageList: Language[];
+    selectedLang: Language;
 }
