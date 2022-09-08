@@ -96,28 +96,6 @@ const connectors: Config[] = [
       return typeof window !== "undefined" && Boolean(window.ethereum?.isSafePal) ? 0 : 999;
     },
   },
-  {
-    title: "Coin98",
-    icon: Coin98,
-    connectorId: ConnectorNames.Injected,
-    // @ts-ignore
-    installed: typeof window !== "undefined" && (Boolean(window.ethereum?.isCoin98) || Boolean(window.coin98)),
-    priority: () => {
-      // @ts-ignore
-      return typeof window !== "undefined" && (Boolean(window.ethereum?.isCoin98) || Boolean(window.coin98)) ? 0 : 999;
-    },
-  },
-  {
-    title: "Blocto",
-    icon: Blocto,
-    connectorId: ConnectorNames.Injected,
-    // @ts-ignore
-    installed: typeof window !== "undefined" && Boolean(window.ethereum?.isBlocto),
-    priority: () => {
-      // @ts-ignore
-      return typeof window !== "undefined" && Boolean(window.ethereum?.isBlocto) ? 0 : 999;
-    },
-  },
 ];
 
 export default connectors;

@@ -1,7 +1,6 @@
 import { ChainId } from '@pancakeswap/sdk'
 import addresses from 'config/constants/contracts'
 import { Address } from 'config/constants/types'
-import { VaultKey } from 'state/types'
 
 export const getAddress = (address: Address, chainId?: number): string => {
   return address[chainId] ? address[chainId] : address[ChainId.BSC]
@@ -57,13 +56,6 @@ export const getTradingCompetitionAddressMoD = () => {
 
 export const getEasterNftAddress = () => {
   return getAddress(addresses.easterNft)
-}
-
-export const getVaultPoolAddress = (vaultKey: VaultKey) => {
-  if (!vaultKey) {
-    return null
-  }
-  return getAddress(addresses[vaultKey])
 }
 
 export const getCakeVaultAddress = () => {

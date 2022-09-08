@@ -1,20 +1,16 @@
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Trade, CurrencyAmount, TradeType, Currency } from '@pancakeswap/sdk'
+import { CurrencyAmount, Currency } from '@pancakeswap/sdk'
 import { useCallback, useMemo } from 'react'
 import { logError } from 'utils/sentry'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import { useTranslation } from '@pancakeswap/localization'
-import { ROUTER_ADDRESS } from 'config/constants/exchange'
 import useTokenAllowance from './useTokenAllowance'
-import { Field } from '../state/swap/actions'
 import { useTransactionAdder, useHasPendingApproval } from '../state/transactions/hooks'
-import { computeSlippageAdjustedAmounts } from '../utils/exchange'
 import { calculateGasMargin } from '../utils'
 import { useTokenContract } from './useContract'
 import { useCallWithGasPrice } from './useCallWithGasPrice'
 import useToast from './useToast'
-import useGelatoLimitOrdersLib from './limitOrders/useGelatoLimitOrdersLib'
 
 export enum ApprovalState {
   UNKNOWN,
@@ -120,25 +116,4 @@ export function useApproveCallback(
   }, [approvalState, token, tokenContract, amountToApprove, spender, addTransaction, callWithGasPrice, t, toastError])
 
   return [approvalState, approve]
-}
-
-// wraps useApproveCallback in the context of a swap
-export function useApproveCallbackFromTrade(
-  trade?: Trade<Currency, Currency, TradeType>,
-  allowedSlippage = 0,
-  chainId?: number,
-) {
-  const amountToApprove = useMemo(
-    () => (trade ? computeSlippageAdjustedAmounts(trade, allowedSlippage)[Field.INPUT] : undefined),
-    [trade, allowedSlippage],
-  )
-
-  return useApproveCallback(amountToApprove, ROUTER_ADDRESS[chainId])
-}
-
-// Wraps useApproveCallback in the context of a Gelato Limit Orders
-export function useApproveCallbackFromInputCurrencyAmount(currencyAmountIn: CurrencyAmount<Currency> | undefined) {
-  const gelatoLibrary = useGelatoLimitOrdersLib()
-
-  return useApproveCallback(currencyAmountIn, gelatoLibrary?.erc20OrderRouter.address ?? undefined)
 }

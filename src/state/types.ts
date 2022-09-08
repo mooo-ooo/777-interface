@@ -6,15 +6,12 @@ import BigNumber from 'bignumber.js'
 import {
   CampaignType,
   DeserializedFarmConfig,
-  DeserializedPoolConfig,
   FetchStatus,
   LotteryStatus,
   LotteryTicket,
-  SerializedPoolConfig,
   Team,
   TranslatableText,
 } from 'config/constants/types'
-import { NftToken } from './nftMarket/types'
 
 export enum GAS_PRICE {
   default = '5',
@@ -29,9 +26,6 @@ export const GAS_PRICE_GWEI = {
   instant: parseUnits(GAS_PRICE.instant, 'gwei').toString(),
   testnet: parseUnits(GAS_PRICE.testnet, 'gwei').toString(),
 }
-
-export type DeserializedPoolVault = DeserializedPool & DeserializedCakeVault
-export type DeserializedPoolLockedVault = DeserializedPool & DeserializedLockedCakeVault
 
 export interface BigNumberToJson {
   type: 'BigNumber'
@@ -100,152 +94,6 @@ interface CorePoolProps {
   vaultKey?: VaultKey
 }
 
-export interface DeserializedPool extends DeserializedPoolConfig, CorePoolProps {
-  totalStaked?: BigNumber
-  stakingLimit?: BigNumber
-  stakingLimitEndBlock?: number
-  profileRequirement?: {
-    required: boolean
-    thresholdPoints: BigNumber
-  }
-  userDataLoaded?: boolean
-  userData?: {
-    allowance: BigNumber
-    stakingTokenBalance: BigNumber
-    stakedBalance: BigNumber
-    pendingReward: BigNumber
-  }
-}
-
-export interface SerializedPool extends SerializedPoolConfig, CorePoolProps {
-  totalStaked?: SerializedBigNumber
-  stakingLimit?: SerializedBigNumber
-  numberBlocksForUserLimit?: number
-  profileRequirement?: {
-    required: boolean
-    thresholdPoints: SerializedBigNumber
-  }
-  userData?: {
-    allowance: SerializedBigNumber
-    stakingTokenBalance: SerializedBigNumber
-    stakedBalance: SerializedBigNumber
-    pendingReward: SerializedBigNumber
-  }
-}
-
-export interface Profile {
-  userId: number
-  points: number
-  teamId: number
-  collectionAddress: string
-  tokenId: number
-  isActive: boolean
-  username: string
-  nft?: NftToken
-  team?: Team
-  hasRegistered: boolean
-}
-
-// Slices states
-
-export interface SerializedFarmsState {
-  data: SerializedFarm[]
-  loadArchivedFarmsData: boolean
-  userDataLoaded: boolean
-  loadingKeys: Record<string, boolean>
-  poolLength?: number
-  regularCakePerBlock?: number
-}
-
-export interface DeserializedFarmsState {
-  data: DeserializedFarm[]
-  loadArchivedFarmsData: boolean
-  userDataLoaded: boolean
-  poolLength?: number
-  regularCakePerBlock?: number
-}
-
-export interface SerializedVaultFees {
-  performanceFee: number
-  withdrawalFee: number
-  withdrawalFeePeriod: number
-}
-
-export interface DeserializedVaultFees extends SerializedVaultFees {
-  performanceFeeAsDecimal: number
-}
-
-export interface SerializedVaultUser {
-  isLoading: boolean
-  userShares: SerializedBigNumber
-  cakeAtLastUserAction: SerializedBigNumber
-  lastDepositedTime: string
-  lastUserActionTime: string
-}
-
-export interface SerializedLockedVaultUser extends SerializedVaultUser {
-  lockStartTime: string
-  lockEndTime: string
-  userBoostedShare: SerializedBigNumber
-  locked: boolean
-  lockedAmount: SerializedBigNumber
-  currentPerformanceFee: SerializedBigNumber
-  currentOverdueFee: SerializedBigNumber
-}
-
-export interface DeserializedVaultUser {
-  isLoading: boolean
-  userShares: BigNumber
-  cakeAtLastUserAction: BigNumber
-  lastDepositedTime: string
-  lastUserActionTime: string
-  balance: {
-    cakeAsNumberBalance: number
-    cakeAsBigNumber: BigNumber
-    cakeAsDisplayBalance: string
-  }
-}
-
-export interface DeserializedLockedVaultUser extends DeserializedVaultUser {
-  lastDepositedTime: string
-  lastUserActionTime: string
-  lockStartTime: string
-  lockEndTime: string
-  burnStartTime: string
-  userBoostedShare: BigNumber
-  locked: boolean
-  lockedAmount: BigNumber
-  currentPerformanceFee: BigNumber
-  currentOverdueFee: BigNumber
-}
-
-export interface DeserializedCakeVault {
-  totalShares?: BigNumber
-  totalLockedAmount?: BigNumber
-  pricePerFullShare?: BigNumber
-  totalCakeInVault?: BigNumber
-  fees?: DeserializedVaultFees
-  userData?: DeserializedVaultUser
-}
-
-export interface DeserializedLockedCakeVault extends Omit<DeserializedCakeVault, 'userData'> {
-  totalLockedAmount?: BigNumber
-  userData?: DeserializedLockedVaultUser
-}
-
-export interface SerializedLockedCakeVault extends Omit<SerializedCakeVault, 'userData'> {
-  totalLockedAmount?: SerializedBigNumber
-  userData?: SerializedLockedVaultUser
-}
-
-export interface SerializedCakeVault {
-  totalShares?: SerializedBigNumber
-  pricePerFullShare?: SerializedBigNumber
-  totalCakeInVault?: SerializedBigNumber
-  fees?: SerializedVaultFees
-  userData?: SerializedVaultUser
-}
-
 // Ifo
 export interface IfoState extends PublicIfoData {
   credit: string
@@ -255,13 +103,6 @@ export interface PublicIfoData {
   ceiling: string
 }
 
-export interface PoolsState {
-  data: SerializedPool[]
-  ifo: IfoState
-  cakeVault: SerializedLockedCakeVault
-  cakeFlexibleSideVault: SerializedCakeVault
-  userDataLoaded: boolean
-}
 
 export type TeamsById = {
   [key: string]: Team
@@ -706,9 +547,6 @@ export interface PotteryWithdrawAbleData {
 // Global state
 
 export interface State {
-  farms: SerializedFarmsState
-  farmsV1: SerializedFarmsState
-  pools: PoolsState
   predictions: PredictionsState
   lottery: LotteryState
   pottery: PotteryState
