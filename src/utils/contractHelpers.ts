@@ -6,7 +6,6 @@ import { CAKE } from '@pancakeswap/tokens'
 
 // Addresses
 import {
-  getClaimRefundAddress,
   getMulticallAddress,
 } from 'utils/addressHelpers'
 
@@ -14,7 +13,6 @@ import {
 import bep20Abi from 'config/abi/erc20.json'
 import erc721Abi from 'config/abi/erc721.json'
 import cakeAbi from 'config/abi/cake.json'
-import claimRefundAbi from 'config/abi/claimRefund.json'
 import chainlinkOracleAbi from 'config/abi/chainlinkOracle.json'
 import MultiCallAbi from 'config/abi/Multicall.json'
 import erc721CollectionAbi from 'config/abi/erc721collection.json'
@@ -25,7 +23,6 @@ import type {
   Erc20,
   Erc721,
   Cake,
-  ClaimRefund,
   Multicall,
   Erc721collection,
 } from 'config/abi/types'
@@ -60,11 +57,6 @@ export const getCakeContract = (signer?: Signer | Provider, chainId?: number) =>
     signer,
   }) as Cake
 }
-
-export const getClaimRefundContract = (signer?: Signer | Provider) => {
-  return getContract({ abi: claimRefundAbi, address: getClaimRefundAddress(), signer }) as ClaimRefund
-}
-
 
 export const getChainlinkOracleContract = (address: string, signer?: Signer | Provider) => {
   return getContract({ abi: chainlinkOracleAbi, address, signer }) as ChainlinkOracle

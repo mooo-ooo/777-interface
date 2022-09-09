@@ -96,7 +96,8 @@
     "swiper": "^8.3.2",
     "swr": "^1.3.0",
     "typescript": "^4.6.3",
-    "wagmi": "^0.6.0"
+    "wagmi": "^0.6.0",
+    "jwt-decode": "^3.1.2"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^12.0.10",
