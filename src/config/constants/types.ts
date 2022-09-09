@@ -1,7 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { Token, ChainId } from '@pancakeswap/sdk'
 import { SerializedWrappedToken } from '@pancakeswap/tokens'
-import type { SerializedFarmConfig, FarmConfigBaseProps } from '@pancakeswap/farms'
 
 // a list of tokens by chain
 export type ChainMap<T> = {
@@ -65,12 +64,6 @@ export enum PoolCategory {
   'AUTO' = 'Auto',
 }
 
-export type { SerializedFarmConfig, FarmConfigBaseProps }
-
-export interface DeserializedFarmConfig extends FarmConfigBaseProps {
-  token: Token
-  quoteToken: Token
-}
 
 interface PoolConfigBaseProps {
   sousId: number

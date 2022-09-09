@@ -25,8 +25,6 @@ jobs:
       - name: Test
         run: yarn test:config
 
-      - name: Build list
-        run: yarn turbo run build --filter=@pancakeswap/farms
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@1

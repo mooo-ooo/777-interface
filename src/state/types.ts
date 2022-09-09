@@ -1,11 +1,9 @@
 import { BigNumber as EthersBigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
-import { SerializedFarmPublicData } from '@pancakeswap/farms'
 import { Token } from '@pancakeswap/sdk'
 import BigNumber from 'bignumber.js'
 import {
   CampaignType,
-  DeserializedFarmConfig,
   FetchStatus,
   LotteryStatus,
   LotteryTicket,
@@ -45,58 +43,6 @@ interface SerializedFarmUserData {
     stakedBalance: string
     earnings: string
   }
-}
-
-export interface DeserializedFarmUserData {
-  allowance: BigNumber
-  tokenBalance: BigNumber
-  stakedBalance: BigNumber
-  earnings: BigNumber
-  proxy?: {
-    allowance: BigNumber
-    tokenBalance: BigNumber
-    stakedBalance: BigNumber
-    earnings: BigNumber
-  }
-}
-
-export interface SerializedFarm extends SerializedFarmPublicData {
-  userData?: SerializedFarmUserData
-}
-
-export interface DeserializedFarm extends DeserializedFarmConfig {
-  tokenPriceBusd?: string
-  quoteTokenPriceBusd?: string
-  tokenAmountTotal?: BigNumber
-  quoteTokenAmountTotal?: BigNumber
-  lpTotalInQuoteToken?: BigNumber
-  lpTotalSupply?: BigNumber
-  tokenPriceVsQuote?: BigNumber
-  poolWeight?: BigNumber
-  userData?: DeserializedFarmUserData
-  boosted?: boolean
-}
-
-export enum VaultKey {
-  CakeVaultV1 = 'cakeVaultV1',
-  CakeVault = 'cakeVault',
-  CakeFlexibleSideVault = 'cakeFlexibleSideVault',
-  IfoPool = 'ifoPool',
-}
-
-interface CorePoolProps {
-  startBlock?: number
-  endBlock?: number
-  apr?: number
-  rawApr?: number
-  stakingTokenPrice?: number
-  earningTokenPrice?: number
-  vaultKey?: VaultKey
-}
-
-// Ifo
-export interface IfoState extends PublicIfoData {
-  credit: string
 }
 
 export interface PublicIfoData {
