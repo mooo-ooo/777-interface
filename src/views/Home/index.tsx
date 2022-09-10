@@ -19,11 +19,11 @@ const Home: React.FC<React.PropsWithChildren> = () => {
     <>
       <PageMeta />
       <Banner>
-        <img className="bg" src="/images/home/banner-bg.jpg" alt="bg"/>
+        <Box className="bg" height='inherit' />
         <img className='esport' src="/images/home/banner-esport.jpg" alt="esport"/>
-        <img className='bottom' src="/images/home/bottom.svg" alt="bottom"/>
       </Banner>
       {/* <PageSection
+        background="url(/images/bg-lines-mainLeft.png)"
         innerProps={{ style: { margin: '0', width: '100%' } }}
         index={2}
         hasCurvedDivider={false}
@@ -37,24 +37,39 @@ const Home: React.FC<React.PropsWithChildren> = () => {
 export default Home
 
 const Banner = styled(Box)`
-  height: 500px;
+  height: 450px;
   position: relative;
   .bg {
-    height: 500px;
     width: 100%;
+    background-image: url(/images/home/banner-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: 50%;
   }
   .esport {
     position: absolute;
-    left: 45%;
-    z-index: 2;
+    right: 0px;
+    left: 0px;
+    z-index: 10;
+    margin: auto;
     bottom: 0;
-    height: 100%;
+    height: auto;
+    max-width: 380px;
   }
-  .bottom {
+  &:after {
     position: absolute;
-    bottom: 0;
-    z-index: 2;
-    right: 0;
+    bottom: 0px;
     width: 100%;
+    content: "";
+    height: 17px;
+    background-image: url(/images/home/bottom.svg);
+    background-position: bottom 0 center;
+    background-size: auto 100%;
+    z-index: 10;
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    .esport {
+      left: 35%;
+      max-width: max-content;
+    }
   }
 `
