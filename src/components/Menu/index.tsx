@@ -4,6 +4,7 @@ import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Menu as UikitMenu } from '@pancakeswap/uikit'
 import { useTranslation, languageList } from '@pancakeswap/localization'
 import { NetworkSwitcher } from 'components/NetworkSwitcher'
+import { Button } from 'components/Button'
 import useTheme from 'hooks/useTheme'
 import UserMenu from './UserMenu'
 import { useMenuItems } from './hooks/useMenuItems'
@@ -36,6 +37,8 @@ const Menu = (props) => {
         }}
         rightSide={
           <>
+            <Button variant="secondary">Sign In</Button>
+            <Button variant="primary">Sign Up</Button>
             <NetworkSwitcher />
             <UserMenu />
           </>
