@@ -32,19 +32,6 @@ export interface BigNumberToJson {
 
 export type SerializedBigNumber = string
 
-interface SerializedFarmUserData {
-  allowance: string
-  tokenBalance: string
-  stakedBalance: string
-  earnings: string
-  proxy?: {
-    allowance: string
-    tokenBalance: string
-    stakedBalance: string
-    earnings: string
-  }
-}
-
 export interface PublicIfoData {
   ceiling: string
 }

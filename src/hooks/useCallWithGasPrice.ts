@@ -1,12 +1,11 @@
 import { useCallback } from 'react'
 import { TransactionResponse } from '@ethersproject/providers'
 import { Contract, CallOverrides } from '@ethersproject/contracts'
-import { useGasPrice } from 'state/user/hooks'
+import { GAS_PRICE_GWEI } from 'state/types'
 import get from 'lodash/get'
 import { addBreadcrumb } from '@sentry/nextjs'
 
 export function useCallWithGasPrice() {
-  const gasPrice = useGasPrice()
 
   /**
    * Perform a contract call with a gas price returned from useGasPrice
@@ -25,7 +24,7 @@ export function useCallWithGasPrice() {
     ): Promise<TransactionResponse> => {
       addBreadcrumb({
         type: 'Transaction',
-        message: `Call with gas price: ${gasPrice}`,
+        message: `Call with gas price: ${GAS_PRICE_GWEI.default}`,
         data: {
           contractAddress: contract.address,
           methodName,
@@ -38,7 +37,7 @@ export function useCallWithGasPrice() {
       const hasManualGasPriceOverride = overrides?.gasPrice
       const tx = await contractMethod(
         ...methodArgs,
-        hasManualGasPriceOverride ? { ...overrides } : { ...overrides, gasPrice },
+        hasManualGasPriceOverride ? { ...overrides } : { ...overrides, gasPrice: GAS_PRICE_GWEI.default },
       )
 
       if (tx) {
@@ -56,7 +55,7 @@ export function useCallWithGasPrice() {
 
       return tx
     },
-    [gasPrice],
+    [],
   )
 
   return { callWithGasPrice }

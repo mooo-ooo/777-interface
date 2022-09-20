@@ -1,8 +1,7 @@
 
 import { useState } from 'react'
 import jwtDecode from 'jwt-decode'
-
-export const TOKEN_KEY = '777-token'
+import { TOKEN_KEY } from 'config'
 
 export interface UserProps {
   username: string

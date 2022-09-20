@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Text, Flex, Heading, IconButton, ArrowBackIcon, NotificationDot } from '@pancakeswap/uikit'
+import { Text, Flex, Heading, IconButton, ArrowBackIcon } from '@pancakeswap/uikit'
 import Link from 'next/link'
 import QuestionHelper from '../QuestionHelper'
 
@@ -19,7 +19,7 @@ const AppHeaderContainer = styled(Flex)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `
 
-const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, helper, backTo, noConfig = false }) => {
+const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, helper, backTo }) => {
 
   return (
     <AppHeaderContainer>

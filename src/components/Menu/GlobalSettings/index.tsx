@@ -1,4 +1,4 @@
-import { Flex, IconButton, CogIcon, useModal } from '@pancakeswap/uikit'
+import { Flex, IconButton, CogIcon } from '@pancakeswap/uikit'
 
 type Props = {
   color?: string

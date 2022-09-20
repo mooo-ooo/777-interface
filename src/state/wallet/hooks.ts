@@ -1,8 +1,6 @@
 import { Currency, CurrencyAmount, JSBI, Native, Token } from '@pancakeswap/sdk'
 import { useMemo } from 'react'
-import { useWeb3React } from '@pancakeswap/wagmi'
 import ERC20_INTERFACE from 'config/abi/erc20'
-import { useAllTokens } from 'hooks/Tokens'
 import { useMulticallContract } from 'hooks/useContract'
 import { isAddress } from 'utils'
 import orderBy from 'lodash/orderBy'
@@ -130,11 +128,11 @@ export function useCurrencyBalance(account?: string, currency?: Currency): Curre
   return useCurrencyBalances(account, [currency])[0]
 }
 
-// mimics useAllBalances
-export function useAllTokenBalances(): { [tokenAddress: string]: CurrencyAmount<Token> | undefined } {
-  const { account } = useWeb3React()
-  const allTokens = useAllTokens()
-  const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
-  const balances = useTokenBalances(account ?? undefined, allTokensArray)
-  return balances ?? {}
-}
+// // mimics useAllBalances
+// export function useAllTokenBalances(): { [tokenAddress: string]: CurrencyAmount<Token> | undefined } {
+//   const { account } = useWeb3React()
+//   const allTokens = useAllTokens()
+//   const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
+//   const balances = useTokenBalances(account ?? undefined, allTokensArray)
+//   return balances ?? {}
+// }

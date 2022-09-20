@@ -1,17 +1,22 @@
 import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Menu as UikitMenu } from '@pancakeswap/uikit'
+import { Menu as UikitMenu, Text } from '@pancakeswap/uikit'
 import { useTranslation, languageList } from '@pancakeswap/localization'
 import { NetworkSwitcher } from 'components/NetworkSwitcher'
 import { Button } from 'components/Button'
 import useTheme from 'hooks/useTheme'
+import useToken from 'hooks/useToken'
+import { useWeb3React } from '@pancakeswap/wagmi'
+import useLogin from 'hooks/useLogin'
 import UserMenu from './UserMenu'
 import { useMenuItems } from './hooks/useMenuItems'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
 import { footerLinks } from './config/footerConfig'
 
 const Menu = (props) => {
+  const { account } = useWeb3React()
+  const { getParsedToken } = useToken()
   const { isDark, setTheme } = useTheme()
   const { currentLanguage, setLanguage, t } = useTranslation()
   const { pathname } = useRouter()
@@ -29,6 +34,10 @@ const Menu = (props) => {
     return footerLinks(t)
   }, [t])
 
+  const user = getParsedToken()
+
+  const { signIn, isSignInloading } = useLogin()
+
   return (
     <>
       <UikitMenu
@@ -37,8 +46,7 @@ const Menu = (props) => {
         }}
         rightSide={
           <>
-            <Button variant="secondary">Sign In</Button>
-            <Button variant="primary">Sign Up</Button>
+            {user ? <Text mr="12px">{user.username}</Text> : account ? <Button isLoading={isSignInloading} variant="secondary" onClick={signIn}>Sign In</Button> : null}
             <NetworkSwitcher />
             <UserMenu />
           </>

@@ -1,7 +1,7 @@
 import {
   Cake,
   Erc20,
-  Erc20Bytes32,
+  // Erc20Bytes32,
   Erc721collection,
   Multicall,
   Weth,
@@ -14,7 +14,6 @@ import {
   getBep20Contract,
   getCakeContract,
   getChainlinkOracleContract,
-  getClaimRefundContract,
   getErc721CollectionContract,
   getErc721Contract,
 } from 'utils/contractHelpers'
@@ -23,7 +22,7 @@ import { useSigner } from 'wagmi'
 // Imports below migrated from Exchange useContract.ts
 import { Contract } from '@ethersproject/contracts'
 import { WNATIVE } from '@pancakeswap/sdk'
-import { ERC20_BYTES32_ABI } from '../config/abi/erc20'
+// import { ERC20_BYTES32_ABI } from '../config/abi/erc20'
 import ERC20_ABI from '../config/abi/erc20.json'
 import multiCallAbi from '../config/abi/Multicall.json'
 import WETH_ABI from '../config/abi/weth.json'
@@ -55,11 +54,6 @@ export const useCake = (): { reader: Cake; signer: Cake } => {
     }),
     [providerOrSigner],
   )
-}
-
-export const useClaimRefundContract = () => {
-  const { data: signer } = useSigner()
-  return useMemo(() => getClaimRefundContract(signer), [signer])
 }
 
 export const useChainlinkOracleContract = (address, withSignerIfPossible = true) => {
@@ -113,9 +107,9 @@ export function useWNativeContract(withSignerIfPossible?: boolean): Contract | n
   return useContract<Weth>(chainId ? WNATIVE[chainId]?.address : undefined, WETH_ABI, withSignerIfPossible)
 }
 
-export function useBytes32TokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract<Erc20Bytes32>(tokenAddress, ERC20_BYTES32_ABI, withSignerIfPossible)
-}
+// export function useBytes32TokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
+//   return useContract<Erc20Bytes32>(tokenAddress, ERC20_BYTES32_ABI, withSignerIfPossible)
+// }
 
 export function useMulticallContract() {
   const { chainId } = useActiveWeb3React()

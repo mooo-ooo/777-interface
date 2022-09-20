@@ -1,4 +1,4 @@
-import React, { ElementType } from 'react'
+import { ElementType } from 'react'
 import styled from 'styled-components'
 import EXTERNAL_LINK_PROPS from 'utils/externalLinkProps'
 import { styleVariants } from 'components/Button/theme'
