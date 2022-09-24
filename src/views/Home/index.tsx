@@ -5,9 +5,10 @@ import useTheme from 'hooks/useTheme'
 import { Box } from '@pancakeswap/uikit'
 import { PageMeta } from 'components/Layout/Page'
 import { useTranslation } from '@pancakeswap/localization'
+import Card from 'components/Card'
+import CardBox from 'components/CardBox'
 // import { useActiveChainId } from 'hooks/useActiveChainId'
 // import { ChainId } from '@pancakeswap/sdk'
-
 
 const Home: React.FC<React.PropsWithChildren> = () => {
   // const { theme } = useTheme()
@@ -19,17 +20,16 @@ const Home: React.FC<React.PropsWithChildren> = () => {
     <>
       <PageMeta />
       <Banner>
-        <Box className="bg" height='inherit' />
-        <img className='esport' src="/images/home/banner-esport.jpg" alt="esport"/>
+        <Box className="bg" height="inherit" />
+        <img className="esport" src="/images/home/bg-gang.png" alt="esport" />
       </Banner>
+      {/* <CardBox /> */}
       {/* <PageSection
         background="url(/images/bg-lines-mainLeft.png)"
         innerProps={{ style: { margin: '0', width: '100%' } }}
         index={2}
         hasCurvedDivider={false}
-      >
-        
-      </PageSection> */}
+      /> */}
     </>
   )
 }
@@ -43,7 +43,7 @@ const Banner = styled(Box)`
     width: 100%;
     background-image: url(/images/home/banner-bg.jpg);
     background-repeat: no-repeat;
-    background-position: 50%;
+    background-size: auto 100%;
   }
   .esport {
     position: absolute;
@@ -59,7 +59,7 @@ const Banner = styled(Box)`
     position: absolute;
     bottom: 0px;
     width: 100%;
-    content: "";
+    content: '';
     height: 17px;
     background-image: url(/images/home/bottom.svg);
     background-position: bottom 0 center;
