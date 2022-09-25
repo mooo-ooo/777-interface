@@ -120,7 +120,7 @@ const StyledButton = styled.div<{ variant: string }>`
     background-repeat: no-repeat;
     transition-duration: 300ms;
     transition-timing-function: linear;
-    padding: 0 18px;
+    padding: 0 24px;
     background-image: linear-gradient(
         -135deg,
         transparent 4px,
