@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Menu as UikitMenu, Text } from '@pancakeswap/uikit'
@@ -8,7 +8,9 @@ import { Button } from 'components/Button'
 import useTheme from 'hooks/useTheme'
 import useToken from 'hooks/useToken'
 import { useWeb3React } from '@pancakeswap/wagmi'
+import { usePreviousValue } from '@pancakeswap/hooks'
 import useLogin from 'hooks/useLogin'
+
 import UserMenu from './UserMenu'
 import { useMenuItems } from './hooks/useMenuItems'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
@@ -16,8 +18,9 @@ import { footerLinks } from './config/footerConfig'
 
 const Menu = (props) => {
   const { account } = useWeb3React()
-  const { getParsedToken } = useToken()
+  const { getParsedToken, removeToken } = useToken()
   const { isDark, setTheme } = useTheme()
+  const previousAccount = usePreviousValue(account)
   const { currentLanguage, setLanguage, t } = useTranslation()
   const { pathname } = useRouter()
 
@@ -29,6 +32,14 @@ const Menu = (props) => {
   const toggleTheme = useMemo(() => {
     return () => setTheme(isDark ? 'light' : 'dark')
   }, [setTheme, isDark])
+
+  useEffect(() => {
+    const isChangedAccount = previousAccount && account && account !== previousAccount
+    const isDisconnected = previousAccount && !account
+    if (isDisconnected || isChangedAccount) {
+      removeToken()
+    }
+  }, [account, removeToken, previousAccount])
 
   const getFooterLinks = useMemo(() => {
     return footerLinks(t)
