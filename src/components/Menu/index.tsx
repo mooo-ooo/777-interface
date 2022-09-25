@@ -1,10 +1,9 @@
 import { useMemo, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Menu as UikitMenu, Text } from '@pancakeswap/uikit'
+import { Menu as UikitMenu, Text, Button } from '@pancakeswap/uikit'
 import { useTranslation, languageList } from '@pancakeswap/localization'
 import { NetworkSwitcher } from 'components/NetworkSwitcher'
-import { Button } from 'components/Button'
 import useTheme from 'hooks/useTheme'
 import useToken from 'hooks/useToken'
 import { useWeb3React } from '@pancakeswap/wagmi'
@@ -57,7 +56,7 @@ const Menu = (props) => {
         }}
         rightSide={
           <>
-            {user ? <Text mr="12px">{user.username}</Text> : account ? <Button isLoading={isSignInloading} variant="secondary" onClick={signIn}>Sign In</Button> : null}
+            {user ? <Text mr="12px">{user.username}</Text> : account ? <Button mr="8px" isLoading={isSignInloading} onClick={signIn}>Sign In</Button> : null}
             <NetworkSwitcher />
             <UserMenu />
           </>

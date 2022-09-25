@@ -28,10 +28,34 @@ const config: (t: ContextApi['t'], isDark: boolean, languageCode?: string, chain
   (t, isDark, languageCode, chainId) =>
     [
       {
-        label: t('Trade'),
+        label: t('Sportsbook'),
         icon: SwapIcon,
         fillIcon: SwapFillIcon,
-        href: '/swap',
+        href: '/sportsbook',
+        showItemsOnMobile: false,
+        items: [].map((item) => addMenuItemSupported(item, chainId)),
+      },
+      {
+        label: t('Live Casino'),
+        icon: SwapIcon,
+        fillIcon: SwapFillIcon,
+        href: '/live-casino',
+        showItemsOnMobile: false,
+        items: [].map((item) => addMenuItemSupported(item, chainId)),
+      },
+      {
+        label: t('Slot'),
+        icon: SwapIcon,
+        fillIcon: SwapFillIcon,
+        href: '/slot',
+        showItemsOnMobile: false,
+        items: [].map((item) => addMenuItemSupported(item, chainId)),
+      },
+      {
+        label: t('E-sport'),
+        icon: SwapIcon,
+        fillIcon: SwapFillIcon,
+        href: '/e-sport',
         showItemsOnMobile: false,
         items: [].map((item) => addMenuItemSupported(item, chainId)),
       },

@@ -18,15 +18,17 @@ export const scaleVariants = {
 
 export const styleVariants = {
   [variants.PRIMARY]: {
-    backgroundColor: "primary",
-    color: "white",
+    backgroundColor: "#00ffc2",
+    color: "#151d24",
+    backgroundHover: `url("/images/button/primary.svg")`,
   },
   [variants.SECONDARY]: {
-    backgroundColor: "transparent",
+    backgroundHover: `url("/images/button/secondary.svg")`,
+    backgroundColor: "#ffffff",
     border: "2px solid",
     borderColor: "primary",
     boxShadow: "none",
-    color: "primary",
+    color: "white",
     ":disabled": {
       backgroundColor: "transparent",
     },
@@ -35,27 +37,33 @@ export const styleVariants = {
     backgroundColor: "tertiary",
     boxShadow: "none",
     color: "primary",
+    backgroundHover: `url("/images/button/secondary.svg")`,
   },
   [variants.SUBTLE]: {
     backgroundColor: "textSubtle",
     color: "backgroundAlt",
+    backgroundHover: `url("/images/button/secondary.svg")`,
   },
   [variants.DANGER]: {
     backgroundColor: "failure",
     color: "white",
+    backgroundHover: `url("/images/button/secondary.svg")`,
   },
   [variants.SUCCESS]: {
     backgroundColor: "success",
     color: "white",
+    backgroundHover: `url("/images/button/secondary.svg")`,
   },
   [variants.TEXT]: {
     backgroundColor: "transparent",
     color: "primary",
     boxShadow: "none",
+    backgroundHover: `url("/images/button/secondary.svg")`,
   },
   [variants.LIGHT]: {
     backgroundColor: "input",
     color: "textSubtle",
     boxShadow: "none",
+    backgroundHover: `url("/images/button/secondary.svg")`,
   },
 };
