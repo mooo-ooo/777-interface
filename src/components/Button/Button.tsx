@@ -12,8 +12,8 @@ const BaseButton = <E extends ElementType = 'button'>(props: ButtonProps<E>): JS
   const classNames = className ? [className] : []
 
   return (
-    <StyledButton variant={variant}>
-      <Link $isLoading={isLoading} className={classNames.join(' ')} disabled={isDisabled} {...internalProps} {...rest}>
+    <StyledButton variant={variant} className={classNames.join(' ')}>
+      <Link $isLoading={isLoading} disabled={isDisabled} {...internalProps} {...rest}>
         {children}
       </Link>
     </StyledButton>

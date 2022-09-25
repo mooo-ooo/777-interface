@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 const CardBox = (props: any): JSX.Element => {
-  const { hideSide, theme = 'primary' } = props
+  const { hideSide, theme = 'primary', hideBackground } = props
   const color = theme === 'primary' ? '#ff004d' : '#00ffc2'
   return (
-    <StyledBox color={color}>
+    <StyledBox color={color} hideBackground={hideBackground}>
       <Left hide={hideSide} />
       <Right hide={hideSide} />
       <StyleBoxDetail>{props.children}</StyleBoxDetail>
@@ -12,7 +12,7 @@ const CardBox = (props: any): JSX.Element => {
   )
 }
 
-const StyledBox = styled.div<{ color: string }>`
+const StyledBox = styled.div<{ color: string; hideBackground?: boolean }>`
   position: relative;
   display: flex;
   margin-bottom: 16px;
@@ -30,7 +30,11 @@ const StyledBox = styled.div<{ color: string }>`
       ${({ color }) => color} calc(50% + 1px),
       transparent calc(50% + 1px)
     ),
-    linear-gradient(114deg, rgba(255, 0, 77, 0.2), rgba(255, 0, 77, 0));
+    ${({ hideBackground }) =>
+      hideBackground
+        ? 'linear-gradient(114deg, rgba(255, 0, 77, 0.2), rgba(255, 0, 77, 0))'
+        : 'linear-gradient(114deg, rgba(255, 0, 77, 0.2), rgba(255, 0, 77, 0)), url(/images/card/box_bg.svg);'}
+
   background-size: 3px 100%, 3px 100%, 100% 3px, 100% 4px, 20px 20px, 100% 100%, contain;
   background-position: 0 0, 100% -16px, 0 0, -16px calc(100% + 1px), 100% 100%, 100% 100%, 0 0;
   background-repeat: no-repeat;
@@ -40,7 +44,7 @@ const StyledBox = styled.div<{ color: string }>`
     position: absolute;
     width: 88px;
     height: 20px;
-    background-image: url('/images/card/highlight.svg');
+    background-image: url(/images/card/highlight.svg);
     background-repeat: no-repeat;
     top: -1px;
     left: 28px;
@@ -51,7 +55,7 @@ const StyledBox = styled.div<{ color: string }>`
     position: absolute;
     width: 88px;
     height: 20px;
-    background-image: url('/images/card/highlight.svg');
+    background-image: url(/images/card/highlight.svg);
     background-repeat: no-repeat;
     bottom: 28px;
     right: 4px;
@@ -80,7 +84,7 @@ const Right = styled.div<{ hide: boolean }>`
   top: 21px;
   height: 94px;
   width: 9px;
-  background-image: url('/images/card/right.svg');
+  background-image: url(/images/card/right.svg);
   background-size: 9px 100%;
 `
 
