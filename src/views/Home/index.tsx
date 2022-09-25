@@ -3,7 +3,7 @@ import Image from 'next/future/image'
 // import PageSection from 'components/PageSection'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import useTheme from 'hooks/useTheme'
-import { Box } from '@pancakeswap/uikit'
+import { Box, Grid, Flex } from '@pancakeswap/uikit'
 import { PageMeta } from 'components/Layout/Page'
 import { useTranslation } from '@pancakeswap/localization'
 import Card from 'components/Card'
@@ -61,19 +61,22 @@ const Home: React.FC<React.PropsWithChildren> = () => {
       </SectionOne>
 
       <SectionTwo>
-        <ContainerSectionTwo>
-          <Row className="category">
+        <ContainerSectionTwo my={["24px", null, null, "48px"]}>
+          <Grid className="category" gridGap="16px" gridTemplateColumns={['repeat(2, 1fr)', null, null, 'repeat(4, 1fr)']}>
             {categories.map((item) => (
-              <AutoColumn key={item.name} className="section-two_box">
-                <h2 className="section-two_title">{item.name}</h2>
-                <CardBox>
-                  <div className="section-two_body">
-                    <Image src={item.image} alt={item.name} fill />
-                  </div>
-                </CardBox>
-              </AutoColumn>
+              // <AutoColumn key={item.name} className="section-two_box">
+                <Flex flexDirection="column">
+                  <h2 className="section-two_title">{item.name}</h2>
+                  <CardBox>
+                    <div className="section-two_body">
+                      <Image src={item.image} alt={item.name} fill />
+                    </div>
+                  </CardBox>
+                </Flex>
+                
+              // </AutoColumn>
             ))}
-          </Row>
+          </Grid>
         </ContainerSectionTwo>
       </SectionTwo>
 
@@ -96,7 +99,6 @@ const SectionOne = styled.div`
   position: relative;
   background-image: url(/images/home/banner-bg.jpg);
   background-repeat: no-repeat;
-  background-size: auto 100%;
 
   &:after {
     position: absolute;
@@ -165,9 +167,6 @@ const Banner = styled(Box)`
 const SectionTwo = styled.div``
 
 const ContainerSectionTwo = styled(Container)`
-  padding: 0;
-  margin-top: 48px;
-  margin-bottom: 32px;
   .category {
     gap: 16px;
   }
