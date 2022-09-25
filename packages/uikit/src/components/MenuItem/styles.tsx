@@ -25,9 +25,9 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
   display: flex;
   align-items: center;
 
-  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.secondary : theme.colors.textSubtle)};
+  color: white;
   font-size: 16px;
-  font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};
+  font-weight: bold;
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.5 : 1)};
 
   ${({ $statusColor, theme }) =>
@@ -54,9 +54,42 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
     height: 42px;
   `}
 
+  &:before {
+    content: "";
+    opacity: 0;
+    position: absolute;
+    height: 36px;
+    width: 65px;
+    background-image: url("/images/button/menu-border.svg");
+    background-repeat: no-repeat;
+    transition: .3s linear;
+    top: 0;
+    left: 0;
+  }
+  &:after {
+    content: "";
+    opacity: 0;
+    position: absolute;
+    height: 36px;
+    width: 65px;
+    background-image: url("/images/button/menu-border.svg");
+    background-repeat: no-repeat;
+    transition: .3s linear;
+    bottom: 0;
+    right: 0;
+  }
+
   &:hover {
-    background: ${({ theme }) => theme.colors.tertiary};
-    ${({ $variant }) => $variant === "default" && "border-radius: 16px;"};
+    color: #ff004d;
+    text-shadow: 0 0 16px #ff004d;
+    &:before {
+      transform: translateY(-6px);
+      opacity: 1;
+    }
+    &:after {
+      transform: matrix(-1,0,0,1,0,0) translateY(8px);
+      opacity: 1;
+    }
   }
 `;
 
