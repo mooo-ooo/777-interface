@@ -7,11 +7,13 @@ import { get } from 'utils/http'
 // import useTheme from 'hooks/useTheme'
 import { Box, Grid, Flex } from '@pancakeswap/uikit'
 import { PageMeta } from 'components/Layout/Page'
+import CardGame from 'components/CardGame'
 // import { useTranslation } from '@pancakeswap/localization'
 import CardBox from 'components/CardBox'
 import Container from 'components/Layout/Container'
 import { Button } from 'components/Button'
 import { useEffect, useState } from 'react'
+import { GAMES } from './constant'
 // import { useActiveChainId } from 'hooks/useActiveChainId'
 // import { ChainId } from '@pancakeswap/sdk'
 
@@ -22,32 +24,6 @@ const Home: React.FC<React.PropsWithChildren> = () => {
   // const { account } = useWeb3React()
 
   // const { t } = useTranslation()
-  const categories = [
-    {
-      name: 'Sports',
-      path: '/sportsbook',
-      image: '/images/home/sport.png',
-      button: 'Make Bet',
-    },
-    {
-      name: 'E-Sports',
-      path: '/e-sport',
-      image: '/images/home/esport.png',
-      button: 'Bet Now',
-    },
-    {
-      name: 'Casino',
-      path: '/casino',
-      image: '/images/home/casino.png',
-      button: 'Play Games',
-    },
-    {
-      name: 'Aviator',
-      path: '/aviator',
-      image: '/images/home/aviator.png',
-      button: 'Fly Now',
-    },
-  ]
 
   const getData = async () => {
     const { parsedBody } = await get<{ data: [] }>(`https://97bet-api.cowswap.app/api/games?type=slot&page=0&limit=6`)
@@ -84,7 +60,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
               gridGap="16px"
               gridTemplateColumns={['repeat(2, 1fr)', null, null, 'repeat(4, 1fr)']}
             >
-              {categories.map((item) => (
+              {GAMES.map((item) => (
                 <Flex key={item.name} flexDirection="column" className="section-two_box">
                   <h2 className="section-two_title">{item.name}</h2>
                   <CardBox>
@@ -135,16 +111,8 @@ const Home: React.FC<React.PropsWithChildren> = () => {
                   gridTemplateColumns={['repeat(2, 1fr)', null, null, 'repeat(3, 1fr)']}
                   className="section-three_right"
                 >
-                  {games.map((item) => (
-                    <BoxGame key={item.gameId} flexDirection="column">
-                      <div className="layer-cover">
-                        <Image src={item.thumbnail} alt={item.name} fill className="section-three_game" />
-                      </div>
-                      <Flex flexDirection="column" className="section-three_game-title" mt={12}>
-                        <h2>{item.name}</h2>
-                        <h4>{item.group}</h4>
-                      </Flex>
-                    </BoxGame>
+                  {games.map((game) => (
+                    <CardGame game={game} />
                   ))}
                 </Grid>
               </Flex>

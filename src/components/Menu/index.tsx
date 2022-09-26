@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Menu as UikitMenu, Text, Button } from '@pancakeswap/uikit'
+import { Menu as UikitMenu, Text, Button, MetamaskIcon } from '@pancakeswap/uikit'
 import { useTranslation, languageList } from '@pancakeswap/localization'
 import { NetworkSwitcher } from 'components/NetworkSwitcher'
 import useTheme from 'hooks/useTheme'
@@ -56,7 +56,13 @@ const Menu = (props) => {
         }}
         rightSide={
           <>
-            {user ? <Text mr="12px">{user.username}</Text> : account ? <Button mr="8px" isLoading={isSignInloading} onClick={signIn}>Sign In</Button> : null}
+            {user ? (
+              <Text mr="12px">{user.username}</Text>
+            ) : account ? (
+              <Button mr="8px" isLoading={isSignInloading} onClick={signIn}>
+                Sign In <MetamaskIcon ml="4px" />
+              </Button>
+            ) : null}
             <NetworkSwitcher />
             <UserMenu />
           </>
