@@ -1,6 +1,6 @@
-import Home from '../views/Home'
+import Home from 'views/Home'
 
-const IndexPage = (props) => {
+const IndexPage = () => {
   return <Home />
 }
 
