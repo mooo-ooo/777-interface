@@ -35,4 +35,13 @@ export const styleVariants: any = {
     filter: 'drop-shadow(0 0 14px #fff)',
     filterHover: 'drop-shadow(0 0 14px #fff)',
   },
+  [variants.DANGER]: {
+    backgroundColor: '#ff004d',
+    color: '#ffffff',
+    colorActive: '#ffffff',
+    backgroundButton: '#ff004d',
+    backgroundHover: `url("/images/button/secondary.svg")`,
+    filter: 'drop-shadow(0 0 14px #ff004d)',
+    filterHover: 'drop-shadow(0 0 14px #ff004d)',
+  },
 }

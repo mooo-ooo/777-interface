@@ -24,3 +24,22 @@ export const GAMES = [
     button: 'Spin Now',
   },
 ]
+
+export const ESPORT_GAME = [
+  {
+    name: 'counter-strike',
+    image: '/images/home/game_csgo.png',
+  },
+  {
+    name: 'dota',
+    image: '/images/home/game_dota2.png',
+  },
+  {
+    name: 'fortnite',
+    image: '/images/home/game_fortnite.png',
+  },
+  {
+    name: 'league of legends',
+    image: '/images/home/game_lol.png',
+  },
+]

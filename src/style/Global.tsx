@@ -37,7 +37,7 @@ const GlobalStyle = createGlobalStyle`
         background-image: url(/images/card/top_fixed.svg);
 
         ${({ theme }) => theme.mediaQueries.md} {
-          top: -9px;
+          top: -6px;
           height: 15px;
           background-size: contain;
         }
@@ -62,12 +62,27 @@ const GlobalStyle = createGlobalStyle`
         }
 
         ${({ theme }) => theme.mediaQueries.md} {
-          bottom: -14px;
+          bottom: -11px;
           height: 20px;
         }
       }
     }
   }
+
+  .mobile-view {
+    display: block;
+    ${({ theme }) => theme.mediaQueries.md} {
+      display: none;
+    }
+  }
+
+  .desktop-view {
+    display: none;
+    ${({ theme }) => theme.mediaQueries.md} {
+      display: block;
+    }
+  }
+}
 `
 
 export default GlobalStyle

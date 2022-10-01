@@ -1,20 +1,19 @@
 import styled from 'styled-components'
 
 const CardBox = (props: any): JSX.Element => {
-  const { hideSide, theme = 'primary', hideBackground } = props
+  const { hideSide, theme = 'primary', hideBackground, background } = props
   const color = theme === 'primary' ? '#ff004d' : '#00ffc2'
   return (
-    <StyledBox color={color} hideBackground={hideBackground}>
+    <StyledBox color={color} hideBackground={hideBackground} background={background}>
       <Left hide={hideSide} />
       <Right hide={hideSide} />
-      <StyleBoxDetail>{props.children}</StyleBoxDetail>
+      {props.children}
     </StyledBox>
   )
 }
 
-const StyledBox = styled.div<{ color: string; hideBackground?: boolean }>`
+const StyledBox = styled.div<{ color: string; hideBackground?: boolean; background?: boolean }>`
   position: relative;
-  display: flex;
   margin-bottom: 16px;
   max-width: 100%;
   max-height: 100%;
@@ -30,10 +29,12 @@ const StyledBox = styled.div<{ color: string; hideBackground?: boolean }>`
       ${({ color }) => color} calc(50% + 1px),
       transparent calc(50% + 1px)
     ),
-    ${({ hideBackground }) =>
+    ${({ hideBackground, background }) =>
       hideBackground
-        ? 'linear-gradient(114deg, rgba(255, 0, 77, 0.2), rgba(255, 0, 77, 0))'
-        : 'linear-gradient(114deg, rgba(255, 0, 77, 0.2), rgba(255, 0, 77, 0)), url(/images/card/box_bg.svg);'}
+        ? 'linear-gradient(114deg, rgba(255, 0, 77, 0.2), rgba(255, 0, 77, 0));'
+        : background
+        ? 'linear-gradient(114deg, rgba(255, 0, 77, 0.2), rgba(255, 0, 77, 0)), url(/images/card/box_bg.svg);'
+        : 'linear-gradient(307.48deg,rgba(0,255,255,0),rgba(0,255,255,.1));'}
 
   background-size: 3px 100%, 3px 100%, 100% 3px, 100% 4px, 20px 20px, 100% 100%, contain;
   background-position: 0 0, 100% -16px, 0 0, -16px calc(100% + 1px), 100% 100%, 100% 100%, 0 0;
@@ -88,5 +89,4 @@ const Right = styled.div<{ hide: boolean }>`
   background-size: 9px 100%;
 `
 
-const StyleBoxDetail = styled.div``
 export default CardBox
