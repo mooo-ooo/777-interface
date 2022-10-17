@@ -20,6 +20,7 @@ import { GAMES, ESPORT_GAME } from './constant'
 const Home: React.FC<React.PropsWithChildren> = () => {
   const router = useRouter()
   const [games, setGames] = useState([])
+  const [collapse, setCollapse] = useState()
   // const { theme } = useTheme()
   // const { account } = useWeb3React()
 
@@ -29,6 +30,28 @@ const Home: React.FC<React.PropsWithChildren> = () => {
     const { parsedBody } = await get<{ data: [] }>(`https://97bet-api.cowswap.app/api/games?type=slot&page=0&limit=6`)
     if (!parsedBody) return
     setGames(parsedBody.data)
+  }
+
+  const faq = [
+    {
+      label: 'Can I withdraw my bonus funds?',
+      content:
+        'Our bonuses are sticky, which means that once the bonus is activated, it must be played in its entirety (reaching the wager) in order to withdraw. Of course, if the bonus has expired and your funds have been wagered at least once (in accordance with anti-money laundering regulations), you may proceed with a withdrawal.',
+    },
+    {
+      label: 'Can i play on my mobile?',
+      content:
+        'Our site is totally "Responsive", which means that it adapts to all types of screens! So, you can bet and spin where you want, when you want.',
+    },
+    {
+      label: 'How does the loyalty program work?',
+      content: `It's very simple: the more you play, the more Coinz you get! Coinz allow you to become a VIP or to buy exclusive rewards in the shop.`,
+    },
+  ]
+
+  const handleCollapse = (index) => {
+    if (collapse === index) setCollapse(null)
+    else setCollapse(index)
   }
 
   useEffect(() => {
@@ -245,6 +268,24 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         </Container>
       </SectionPromotion>
 
+      <SectionFAQ>
+        <Container>
+          <h2>FAQ</h2>
+          <div className="faq">
+            {faq.map((item, index) => (
+              <div className="faq_content">
+                <div className="faq_label" onClick={() => handleCollapse(index)} aria-hidden="true">
+                  {item.label}
+                </div>
+                <div className={collapse === index ? 'faq_body open' : 'faq_body'}>
+                  <p>{item.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </SectionFAQ>
+
       {/* <SectionFAQ>
         <Container />
       </SectionFAQ> */}
@@ -431,6 +472,7 @@ const BannerSecondary = styled.div`
   background-size: cover;
   background-size: ${({ theme }) => (theme.mediaQueries.md ? 'cover' : 'auto 100%')};
   background-position: 50%;
+  z-index: 1;
 
   &:before {
     position: absolute;
@@ -509,7 +551,7 @@ const BannerSecondary = styled.div`
     position: absolute;
     right: 0px;
     left: 0px;
-    z-index: 3;
+    z-index: -1;
     margin: auto;
     top: 50%;
     transform: translateY(-50%);
@@ -524,6 +566,7 @@ const BannerSecondary = styled.div`
 `
 
 const SectionPromotion = styled.div`
+  margin-bottom: 90px;
   ${({ theme }) => theme.mediaQueries.md} {
     background-image: url(/images/home/bg_line_right.png);
     background-repeat: no-repeat;
@@ -591,7 +634,7 @@ const SectionPromotion = styled.div`
         font-size: 32px;
       }
       p {
-        margin-bottom: 24px;
+        margin-bottom: 34px;
         font-size: 14px;
         line-height: 18px;
       }
@@ -655,6 +698,63 @@ const SectionPromotion = styled.div`
       position: relative !important;
       width: 100%;
       height: 100%;
+    }
+  }
+`
+
+const SectionFAQ = styled.div`
+  padding-bottom: 60px;
+
+  h2 {
+    margin: 32px 0 28px;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .faq {
+    max-width: 1000px;
+    margin: auto;
+    &_content {
+      border-bottom: 1px solid #aeaeae;
+      background-color: transparent;
+      position: relative;
+    }
+
+    &_label {
+      padding: 24px 0;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+
+      &:before {
+        content: '';
+        margin: auto;
+        width: 28px;
+        height: 28px;
+        top: 14px;
+        right: 14px;
+        background-color: #fff;
+        mask-image: url('/images/home/arrow_faq.svg');
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: 17px;
+        transition: 0.3s linear;
+        z-index: 1;
+        cursor: pointer;
+        position: absolute;
+      }
+    }
+    &_body {
+      display: none;
+      p {
+        padding-bottom: 15px;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 25px;
+      }
+      &.open {
+        display: block;
+      }
     }
   }
 `

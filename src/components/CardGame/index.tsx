@@ -41,7 +41,8 @@ const BoxGame = styled(Flex)`
   }
   :hover {
     cursor: pointer;
-      .action {
+    .action {
+        transition: .3s ease-in-out;
         position: absolute;
         width: 100%;
         height: 100%;
