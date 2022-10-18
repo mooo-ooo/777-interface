@@ -1,73 +1,36 @@
-import { vars } from "@pancakeswap/ui/css/vars.css";
 import React from "react";
-import { Box, Flex } from "../Box";
-import { Link } from "../Link";
-import {
-  StyledFooter,
-  StyledIconMobileContainer,
-  StyledList,
-  StyledListItem,
-  StyledSocialLinks,
-  StyledText,
-  StyledToolsContainer,
-} from "./styles";
+import { Flex } from "../Box";
+import { StyledFooter, StyledList, StyledListItem, StyledEighteen, StyledCopy } from "./styles";
 
-import { Button } from "../Button";
-import CakePrice from "../CakePrice/CakePrice";
-import LangSelector from "../LangSelector/LangSelector";
-import { ArrowForwardIcon, LogoWithTextIcon } from "../Svg";
-import { ThemeSwitcher } from "../ThemeSwitcher";
+import { LogoWithTextIcon } from "../Svg";
 import { FooterProps } from "./types";
 
-const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
-  items,
-  isDark,
-  toggleTheme,
-  currentLang,
-  langs,
-  setLang,
-  cakePriceUsd,
-  buyCakeLabel,
-  ...props
-}) => {
+const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({ items, ...props }) => {
   return (
     <StyledFooter data-theme="dark" p={["40px 16px", null, "56px 40px 32px 40px"]} {...props} justifyContent="center">
       <Flex flexDirection="column" width={["100%", null, "1200px;"]}>
         <Flex
-          order={[2, null, 1]}
           flexDirection={["column", null, "row"]}
-          justifyContent="space-between"
+          justifyContent="center"
           alignItems="flex-start"
-          mb={["42px", null, "36px"]}
+          className="footer-menu"
+          mb={["0", null, "36px"]}
         >
           {items?.map((item) => (
             <StyledList key={item.label}>
               <StyledListItem>{item.label}</StyledListItem>
-              {item.items?.map(({ label, href, isHighlighted = false }) => (
-                <StyledListItem key={label}>
-                  {href ? (
-                    <Link
-                      data-theme="dark"
-                      href={href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      color={isHighlighted ? vars.colors.warning : "text"}
-                      bold={false}
-                    >
-                      {label}
-                    </Link>
-                  ) : (
-                    <StyledText>{label}</StyledText>
-                  )}
-                </StyledListItem>
-              ))}
             </StyledList>
           ))}
-          <Box display={["none", null, "block"]}>
-            <LogoWithTextIcon isDark width="160px" />
-          </Box>
         </Flex>
-        <StyledSocialLinks order={[2]} pb={["42px", null, "32px"]} mb={["0", null, "32px"]} />
+        <Flex flexDirection={["column", null, "row"]} justifyContent="space-between" mt={["24px", null, "0"]}>
+          <Flex flexDirection="row">
+            <Flex alignItems="center">
+              <LogoWithTextIcon isDark width="160px" />
+            </Flex>
+            <StyledEighteen>18+</StyledEighteen>
+          </Flex>
+          <StyledCopy>Gambling can be addictive. Play responsibly. 2022 © Betkub.com All rights reserved.</StyledCopy>
+        </Flex>
       </Flex>
     </StyledFooter>
   );

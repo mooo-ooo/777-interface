@@ -1,8 +1,4 @@
-import {
-  MenuItemsType,
-  SwapIcon,
-  SwapFillIcon,
-} from '@pancakeswap/uikit'
+import { MenuItemsType, SwapIcon, SwapFillIcon } from '@pancakeswap/uikit'
 import { ContextApi } from '@pancakeswap/localization'
 import { DropdownMenuItems } from '@pancakeswap/uikit/src/components/DropdownMenu/types'
 

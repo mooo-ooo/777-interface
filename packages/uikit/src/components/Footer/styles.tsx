@@ -5,11 +5,13 @@ import SocialLinks from "./Components/SocialLinks";
 
 export const StyledFooter = styled(Flex)`
   background: ${darkColors.backgroundAlt};
+  .footer-menu {
+    gap: 34px;
+  }
 `;
 
 export const StyledList = styled.ul`
   list-style: none;
-  margin-bottom: 40px;
 
   ${({ theme }) => theme.mediaQueries.md} {
     margin-bottom: 0px;
@@ -17,15 +19,11 @@ export const StyledList = styled.ul`
 `;
 
 export const StyledListItem = styled.li`
-  font-size: 16px;
-  margin-bottom: 8px;
-  text-transform: capitalize;
-
-  &:first-child {
-    color: ${darkColors.secondary};
-    font-weight: 600;
-    text-transform: uppercase;
-  }
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
 `;
 
 export const StyledIconMobileContainer = styled(Box)`
@@ -54,4 +52,24 @@ export const StyledSocialLinks = styled(SocialLinks)`
 
 export const StyledText = styled.span`
   color: ${darkColors.text};
+`;
+
+export const StyledEighteen = styled(Flex)`
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  font-weight: bold;
+  margin-left: 8px;
+  color: #151d24;
+  border-radius: 50%;
+  background-color: #ffffff;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const StyledCopy = styled(Flex)`
+  color: #6e6d7a;
+  line-height: 1.625;
+  font-size: 12px;
+  align-items: center;
 `;
