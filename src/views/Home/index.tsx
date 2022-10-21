@@ -77,12 +77,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
                   <h2 className="section-two_title">{item.name}</h2>
                   <CardBox background>
                     <div className="section-two_body">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw,(max-width: 1200px) 50vw,33vw"
-                      />
+                      <img src={item.image} alt={item.name} />
                     </div>
                   </CardBox>
 

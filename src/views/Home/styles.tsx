@@ -31,13 +31,15 @@ export const ContainerSectionTwo = styled(Container)`
       height: 94px;
 
       img {
-        max-width: fit-content;
-        left: 0;
-        right: 0;
-        margin: auto;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
       }
       ${({ theme }) => theme.mediaQueries.md} {
         height: 136px;
+        max-height: 100%;
       }
     }
   }

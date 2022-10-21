@@ -1,6 +1,6 @@
 import Sportsbook from 'views/Sportsbook'
 
-const SportsbookPage = (props) => {
+const SportsbookPage = () => {
   return <Sportsbook />
 }
 

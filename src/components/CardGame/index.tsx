@@ -36,26 +36,26 @@ export default CardGame
 
 const BoxGame = styled(Flex)`
   position: relative;
+  .action {
+    display: none;
+  }
+  :hover {
+    cursor: pointer;
     .action {
-      display: none;
+      transition: 0.3s ease-in-out;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      top: 0px;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 0, 77, 0.75);
+      flex-direction: column;
     }
-    :hover {
-      cursor: pointer;
-      .action {
-          transition: .3s ease-in-out;
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          top: 0px;
-          align-content: center;
-          align-items: center;
-          justify-content: center;
-          background: rgba(255,0,77,.75);
-          flex-direction: column;
-        }
-      }
-    }
+  }
+
   .section-three_game {
     object-fit: cover;
     position: relative !important;

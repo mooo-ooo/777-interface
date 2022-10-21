@@ -9,6 +9,9 @@ export const StyledCategory = styled.div`
   display: grid;
   scroll-behavior: smooth;
   grid-gap: 25px;
+  ::-webkit-scrollbar {
+    height: 6px !important;
+  }
 
   ${({ theme }) => theme.mediaQueries.md} {
     grid-gap: 16px;
@@ -22,10 +25,34 @@ export const StyledCategory = styled.div`
     min-width: 72px;
     width: 72px;
     cursor: pointer;
-
     ${({ theme }) => theme.mediaQueries.md} {
       min-width: 100px;
       width: 100px;
+    }
+
+    &_inactive {
+      display: block;
+    }
+    &_active {
+      display: none;
+    }
+
+    &:hover {
+      .category-box_inactive {
+        display: none;
+      }
+      .category-box_active {
+        display: block;
+      }
+    }
+
+    &.active {
+      .category-box_inactive {
+        display: none;
+      }
+      .category-box_active {
+        display: block;
+      }
     }
 
     h4 {
@@ -38,19 +65,6 @@ export const StyledCategory = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-    }
-
-    &_inactive {
-      display: block;
-    }
-    &_active {
-      display: none;
-    }
-
-    &:hover {
-      &_inactive {
-        display: none;
-      }
     }
   }
 `
