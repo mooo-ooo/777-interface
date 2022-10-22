@@ -70,6 +70,10 @@ const StyledBanner = styled(Box)`
     align-content: center;
     z-index: 10;
     display: grid;
+    margin: auto;
+    ${({ theme }) => theme.mediaQueries.md} {
+      margin: 0;
+    }
     h4 {
       margin-bottom: 24px;
       text-transform: uppercase;

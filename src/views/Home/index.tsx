@@ -119,11 +119,11 @@ const Home: React.FC<React.PropsWithChildren> = () => {
                 </Flex>
                 <Grid
                   gridGap="32px"
-                  gridTemplateColumns={['repeat(2, 1fr)', null, null, 'repeat(3, 1fr)']}
+                  gridTemplateColumns={['repeat(2, minmax(0, 1fr))', null, null, 'repeat(3, minmax(0, 1fr))']}
                   className="section-three_right"
                 >
                   {games.map((game) => (
-                    <CardGame game={game} />
+                    <CardGame key={game.slug} game={game} />
                   ))}
                 </Grid>
               </Flex>
@@ -138,11 +138,17 @@ const Home: React.FC<React.PropsWithChildren> = () => {
               </Flex>
               <Grid
                 gridGap="32px"
-                gridTemplateColumns={['repeat(2, 1fr)', null, 'repeat(3, 1fr)', 'repeat(3, 1fr)', 'repeat(6, 1fr)']}
+                gridTemplateColumns={[
+                  'repeat(2, minmax(0, 1fr))',
+                  null,
+                  'repeat(3, minmax(0, 1fr))',
+                  'repeat(3, minmax(0, 1fr))',
+                  'repeat(6, minmax(0, 1fr))',
+                ]}
                 className="section-three_right"
               >
                 {games.map((game) => (
-                  <CardGame game={game} />
+                  <CardGame key={game.slug} game={game} />
                 ))}
               </Grid>
             </Grid>
@@ -164,7 +170,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
               className="esport-game"
             >
               {ESPORT_GAME.map((item) => (
-                <img src={item.image} alt={item.name} />
+                <img key={item.name} src={item.image} alt={item.name} />
               ))}
               <Flex className="spot">
                 <span />
@@ -245,11 +251,17 @@ const Home: React.FC<React.PropsWithChildren> = () => {
             </Flex>
             <Grid
               gridGap="32px"
-              gridTemplateColumns={['repeat(2, 1fr)', null, 'repeat(3, 1fr)', 'repeat(3, 1fr)', 'repeat(6, 1fr)']}
+              gridTemplateColumns={[
+                'repeat(2, minmax(0, 1fr))',
+                null,
+                'repeat(3, minmax(0, 1fr))',
+                'repeat(3, minmax(0, 1fr))',
+                'repeat(6, minmax(0, 1fr))',
+              ]}
               className="section-banner_game"
             >
               {games.map((game) => (
-                <CardGame game={game} />
+                <CardGame key={game.slug} game={game} />
               ))}
             </Grid>
           </Grid>
@@ -261,7 +273,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
           <h2>FAQ</h2>
           <div className="faq">
             {faq.map((item, index) => (
-              <div className="faq_content">
+              <div key={item.label} className="faq_content">
                 <div className="faq_label" onClick={() => handleCollapse(index)} aria-hidden="true">
                   {item.label}
                 </div>

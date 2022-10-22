@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { get } from 'utils/http'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import { Box, Grid, Flex } from '@pancakeswap/uikit'
@@ -8,7 +7,6 @@ import { useEffect, useState } from 'react'
 import Container from 'components/Layout/Container'
 import CardGame from 'components/CardGame'
 import Select from 'components/Select'
-import { Button } from 'components/Button'
 import { StyledCategory } from './styles'
 import { CATEGORIES } from './constants'
 // import { useTranslation } from '@pancakeswap/localization'
@@ -33,7 +31,7 @@ const Sportsbook: React.FC<React.PropsWithChildren> = () => {
   ]
 
   const getData = async () => {
-    const { parsedBody } = await get<{ data: [] }>(`https://97bet-api.cowswap.app/api/games?type=slot&page=0&limit=30`)
+    const { parsedBody } = await get<{ data: [] }>(`https://97bet-api.cowswap.app/api/games?type=slot&page=1&limit=30`)
     if (!parsedBody) return
     setGames(parsedBody.data)
   }
@@ -75,12 +73,16 @@ const Sportsbook: React.FC<React.PropsWithChildren> = () => {
         <Box mb={24}>
           <Grid
             gridGap="24px"
-            gridTemplateColumns={['repeat(2, 1fr)', null, 'repeat(3, 1fr)', 'repeat(3, 1fr)', 'repeat(6, 1fr)']}
+            gridTemplateColumns={[
+              'repeat(2, minmax(0, 1fr))',
+              null,
+              'repeat(3, minmax(0, 1fr))',
+              'repeat(3, minmax(0, 1fr))',
+              'repeat(6, minmax(0, 1fr))',
+            ]}
           >
             {games.map((game) => (
-              <div>
-                <CardGame game={game} />
-              </div>
+              <CardGame key={game.slug} game={game} />
             ))}
           </Grid>
         </Box>
