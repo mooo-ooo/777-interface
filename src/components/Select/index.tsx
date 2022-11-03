@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
-import { ArrowDropDownIcon, Box, BoxProps, Text } from '@pancakeswap/uikit'
+import { Box, BoxProps, Text } from '@pancakeswap/uikit'
 
 const DropDownHeader = styled.div`
-  width: 100%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px 16px;
-  box-shadow: ${({ theme }) => theme.shadows.inset};
-  border: 1px solid ${({ theme }) => theme.colors.inputSecondary};
-  border-radius: 16px;
-  background: ${({ theme }) => theme.colors.input};
-  transition: border-radius 0.15s;
+  padding-left: 16px;
+  max-width: 90%;
+  display: block;
+  text-align: left;
+  img {
+    position: absolute;
+    right: 20px;
+    bottom: 13px;
+  }
 `
 
 const DropDownListContainer = styled.div`
@@ -21,13 +19,13 @@ const DropDownListContainer = styled.div`
   height: 0;
   position: absolute;
   overflow: hidden;
-  background: ${({ theme }) => theme.colors.input};
   z-index: ${({ theme }) => theme.zIndices.dropdown};
   transition: transform 0.15s, opacity 0.15s;
   transform: scaleY(0);
   transform-origin: top;
   opacity: 0;
   width: 100%;
+  margin-top: 7px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     min-width: 168px;
@@ -35,15 +33,38 @@ const DropDownListContainer = styled.div`
 `
 
 const DropDownContainer = styled(Box)<{ isOpen: boolean }>`
+  background-image: linear-gradient(hsla(0, 0%, 100%, 0.5), hsla(0, 0%, 100%, 0.5)),
+    linear-gradient(hsla(0, 0%, 100%, 0.5), hsla(0, 0%, 100%, 0.5)),
+    linear-gradient(hsla(0, 0%, 100%, 0.5), hsla(0, 0%, 100%, 0.5)),
+    linear-gradient(hsla(0, 0%, 100%, 0.5), hsla(0, 0%, 100%, 0.5)),
+    linear-gradient(
+      to bottom left,
+      transparent 50%,
+      hsla(0, 0%, 100%, 0.5) calc(50% - 1px),
+      hsla(0, 0%, 100%, 0.5) calc(50% + 1px),
+      transparent calc(50% + 1px)
+    ),
+    linear-gradient(
+      to top right,
+      transparent calc(50% - 1px),
+      hsla(0, 0%, 100%, 0.5) 50%,
+      hsla(0, 0%, 100%, 0.5) calc(50% + 1px),
+      transparent calc(50% + 1px)
+    ),
+    linear-gradient(transparent, transparent), linear-gradient(transparent, transparent);
+  background-size: 1px 100%, 1px calc(100% - 9px), 100% 1px, calc(100% - 9px) 1px, 10px 10px, 10px 10px, 100% 100%,
+    100% 100%;
+  background-position: 0 -9px, 100% bottom, -9px 0, right 100%, 0 100%, 100% 0, -10px 0, 100% -10px;
+  background-repeat: no-repeat;
+  padding: 8px 0;
+  height: 40px;
+  font-size: 14px;
   cursor: pointer;
   width: 100%;
   position: relative;
-  background: ${({ theme }) => theme.colors.input};
-  border-radius: 16px;
-  height: 40px;
-  min-width: 136px;
-  user-select: none;
-  z-index: 20;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  font-weight: 600;
+  z-index: 10;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     min-width: 168px;
@@ -52,29 +73,57 @@ const DropDownContainer = styled(Box)<{ isOpen: boolean }>`
   ${(props) =>
     props.isOpen &&
     css`
+      background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), linear-gradient(#fff, #fff),
+      linear-gradient(#fff, #fff),
+      linear-gradient(
+        to bottom left,
+        transparent 100%,
+        #fff calc(50% - 1px),
+        #fff calc(50% + 1px),
+        transparent calc(50% + 1px)
+      ),
+      linear-gradient(
+        to top right,
+        transparent calc(50% - 1px),
+        #fff 50%,
+        #fff calc(50% + 1px),
+        transparent calc(50% + 1px)
+      ),
+      linear-gradient(transparent, transparent), linear-gradient(transparent, transparent) ;
+      background-position: 0 100%, 100% bottom, -9px 0, right 100%, 0 100%, 100% 0, -10px 0, 100% -10px;
+
       ${DropDownHeader} {
-        border-bottom: 1px solid ${({ theme }) => theme.colors.inputSecondary};
-        box-shadow: ${({ theme }) => theme.tooltip.boxShadow};
-        border-radius: 16px 16px 0 0;
+        border-bottom: 1px solid transparent};
       }
 
       ${DropDownListContainer} {
-        height: auto;
+        height: 240px;
         transform: scaleY(1);
         opacity: 1;
-        border: 1px solid ${({ theme }) => theme.colors.inputSecondary};
         border-top-width: 0;
-        border-radius: 0 0 16px 16px;
         box-shadow: ${({ theme }) => theme.tooltip.boxShadow};
+        background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff),
+          linear-gradient(transparent, transparent), linear-gradient(#fff, #fff),
+          linear-gradient(
+            to bottom left,
+            transparent 50%,
+            #fff calc(50% - 1px),
+            #fff calc(50% + 1px),
+            transparent calc(50% + 1px)
+          ),
+          linear-gradient(#161d24, #161d24), linear-gradient(#161d24, #161d24);
+        background-size: 1px calc(100% - 9px), 1px 100%, 100% 1px, calc(100% - 9px) 1px, 10px 10px, 100% 100%, 100% 100%;
+        background-position: 0 0, 100% 0, 0 0, right 100%, 0 100%, -9px 0, 100% 0;
+        background-repeat: no-repeat;
+
+        padding: 6px 0 13px;
+        overflow: auto;
+      }
+
+      img {
+        transform: rotate(180deg);
       }
     `}
-
-  svg {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
 `
 
 const DropDownList = styled.ul`
@@ -88,7 +137,7 @@ const ListItem = styled.li`
   list-style: none;
   padding: 8px 16px;
   &:hover {
-    background: ${({ theme }) => theme.colors.inputSecondary};
+    color: #fff;
   }
 `
 
@@ -150,12 +199,15 @@ const Select: React.FunctionComponent<React.PropsWithChildren<SelectProps>> = ({
 
   return (
     <DropDownContainer isOpen={isOpen} {...props}>
-      <DropDownHeader onClick={toggling}>
-        <Text color={!optionSelected && placeHolderText ? 'text' : undefined}>
-          {!optionSelected && placeHolderText ? placeHolderText : options[selectedOptionIndex].label}
-        </Text>
-      </DropDownHeader>
-      <ArrowDropDownIcon color="text" onClick={toggling} />
+      <div aria-hidden="true" onClick={toggling}>
+        <DropDownHeader>
+          <Text color={!optionSelected && placeHolderText ? 'text' : undefined}>
+            {!optionSelected && placeHolderText ? placeHolderText : options[selectedOptionIndex].label}
+          </Text>
+          <img src="/images/home/arrow_faq.svg" alt="Arrow" />
+        </DropDownHeader>
+      </div>
+      {/* <ArrowDropDownIcon color="text" onClick={toggling} /> */}
       <DropDownListContainer>
         <DropDownList>
           {options.map((option, index) =>

@@ -6,7 +6,7 @@ export const CATEGORIES = [
     hoverImage: '/images/category/new_h.png',
   },
   {
-    id: 'minigames',
+    id: 'fishing',
     label: 'Minigames',
     image: '/images/category/mini-games.png',
     hoverImage: '/images/category/mini-games_h.png',
@@ -30,7 +30,7 @@ export const CATEGORIES = [
     hoverImage: '/images/category/jackpot_h.png',
   },
   {
-    id: 'slots',
+    id: 'slot',
     label: 'Slots',
     image: '/images/category/slots.png',
     hoverImage: '/images/category/slots_h.png',
@@ -48,7 +48,7 @@ export const CATEGORIES = [
     hoverImage: '/images/category/virtual-category_h.png',
   },
   {
-    id: 'live_casino',
+    id: 'casino',
     label: 'Live Casino',
     image: '/images/category/live-casino.png',
     hoverImage: '/images/category/live-casino_h.png',
