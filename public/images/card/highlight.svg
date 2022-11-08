@@ -1,6 +1,1 @@
-<svg width="92" height="19" viewBox="0 0 92 19" fill="#00FFC2" xmlns="http://www.w3.org/2000/svg">
-<path d="M77 14H18V15H77V14Z" />
-<path d="M77 15V14L92 0V1L77 15Z" />
-<path d="M18 14V15L15 18H2V17H15L18 14Z" />
-<circle r="1.5" transform="matrix(-1 0 0 1 1.5 17.5)" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="92" height="19" fill="#00FFC2" viewBox="0 0 92 19"><path d="M77 14H18V15H77V14Z"/><path d="M77 15V14L92 0V1L77 15Z"/><path d="M18 14V15L15 18H2V17H15L18 14Z"/><circle r="1.5" transform="matrix(-1 0 0 1 1.5 17.5)"/></svg>
