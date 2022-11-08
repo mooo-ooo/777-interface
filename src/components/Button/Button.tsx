@@ -6,14 +6,14 @@ import { ButtonProps, variants, scales } from 'components/Button/types'
 import { Link } from '../Links'
 
 const BaseButton = <E extends ElementType = 'button'>(props: ButtonProps<E>): JSX.Element => {
-  const { variant = 'primary', external, className, isLoading, disabled, children, ...rest } = props
+  const { variant = 'primary', external, className, isLoading, disabled, children, active, ...rest } = props
   const internalProps = external ? EXTERNAL_LINK_PROPS : {}
   const isDisabled = isLoading || disabled
   const classNames = className ? [className] : []
 
   return (
     <StyledButton variant={variant} className={classNames.join(' ')}>
-      <Link $isLoading={isLoading} disabled={isDisabled} {...internalProps} {...rest}>
+      <Link $isLoading={isLoading} disabled={isDisabled} {...internalProps} {...rest} className={active && 'active'}>
         {children}
       </Link>
     </StyledButton>
@@ -31,7 +31,7 @@ const StyledButton = styled.div<{ variant: string }>`
   background-color: transparent;
   background-repeat: no-repeat;
   text-transform: capitalize;
-  height: 40px;
+  height: 100%;
   padding: 2px;
   font-size: 12px;
   color: ${({ variant }) => styleVariants[variant].color};
@@ -133,6 +133,17 @@ const StyledButton = styled.div<{ variant: string }>`
     color: ${({ variant }) => styleVariants[variant].color};
     border-radius: 0;
     text-transform: capitalize;
+
+    &.active {
+      background-image: linear-gradient(
+          -135deg,
+          transparent 4px,
+          ${({ variant }) => styleVariants[variant].backgroundColor} 0
+        ),
+        linear-gradient(45deg, transparent 4px, ${({ variant }) => styleVariants[variant].backgroundColor} 0);
+      background-position: right 0 top 0, left 0 bottom 0;
+      color: ${({ variant }) => styleVariants[variant].colorActive};
+    }
 
     &:hover,
     &:active {

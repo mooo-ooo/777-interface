@@ -21,6 +21,7 @@ const attachHeaders = (args: RequestInit): RequestInit => {
 }
 
 export async function http<T>(request: RequestInfo): Promise<HttpResponse<T>> {
+  console.log('request', request)
   const response: HttpResponse<T> = await fetch(request)
   try {
     // may error if there is no body

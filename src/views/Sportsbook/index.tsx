@@ -3,7 +3,7 @@ import { useWeb3React } from '@pancakeswap/wagmi'
 import { Box, Grid, Flex } from '@pancakeswap/uikit'
 import { PageMeta } from 'components/Layout/Page'
 import Banner from 'components/Banner'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import Container from 'components/Layout/Container'
 import CardGame from 'components/CardGame'
 import Select from 'components/Select'
@@ -82,6 +82,11 @@ const Sportsbook: React.FC<React.PropsWithChildren> = () => {
           gridTemplateColumns={['1fr', null, null, '24% 24% auto']}
           mb={['12px', null, '12px']}
         >
+          <Select
+            options={options}
+            placeHolderText="Select collection"
+            onOptionChange={(item) => setProvider(item.value)}
+          />
           <Select
             options={options}
             placeHolderText="Select provider"
