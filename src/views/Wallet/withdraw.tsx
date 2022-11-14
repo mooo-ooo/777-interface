@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useWeb3React } from '@pancakeswap/wagmi'
 import { useRouter } from 'next/router'
 import { PageMeta } from 'components/Layout/Page'
 import Container from 'components/Layout/Container'
@@ -6,51 +7,65 @@ import CardBox from 'components/CardBox'
 import { Button } from 'components/Button'
 import { Flex, Grid, Box } from '@pancakeswap/uikit'
 import Input from 'components/Input'
-import { StyledDeposit, StyledBox } from './styles'
+import { StyledWallet, StyledRefresh, StyledBox } from './styles'
 
 const Deposit: React.FC<React.PropsWithChildren> = () => {
+  const { account } = useWeb3React()
   const router = useRouter()
   const { pathname } = router
+  const [balance, setBalance] = useState('0')
   const [select, setSelect] = useState('100')
+  const [email, setEmail] = useState('')
   const list = ['deposit', 'withdraw', 'history']
-  const amounts = ['50', '100', '300', '500']
 
   return (
     <>
       <PageMeta />
-      <StyledDeposit>
+      <StyledWallet>
         <Container>
           <h1>Wallet</h1>
           <Flex className="feature-list">
             {list.map((item) => (
-              <span key={item} className={pathname.includes(item) ? 'active' : undefined}>
+              <span
+                key={item}
+                className={pathname.includes(item) ? 'active' : undefined}
+                onClick={() => router.push(item)}
+                aria-hidden="true"
+              >
                 {item}
               </span>
             ))}
           </Flex>
           <StyledBox>
             <CardBox theme="secondary" hideSide>
-              <h4>Choose or enter deposit amount</h4>
-              <Grid gridGap="12px" gridTemplateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', 'null', 'repeat(4, 1fr)']}>
-                {amounts.map((item) => (
-                  <Box key={item} className="box-btn-amount">
-                    <Button
-                      variant="secondary"
-                      className="btn-amount"
-                      active={select === item}
-                      onClick={() => setSelect(item)}
-                    >
-                      {item}
-                    </Button>
-                  </Box>
-                ))}
-              </Grid>
-              <Box className="input-amount">
+              <Box className="withdraw-input-amount">
+                <h4>Available For Withdrawal</h4>
+                <Grid className="category-game" gridGap="16px" gridTemplateColumns="87% 13%">
+                  <Input
+                    initialValue={`${balance} BUSD`}
+                    onChange={(e) => setBalance(`${e.target.value} BUSD`)}
+                    disabled
+                  />
+                  <StyledRefresh>
+                    <svg width="18" height="20" viewBox="0 0 18 20" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14.9755 5.57379C13.3794 3.97769 11.2572 3.09867 8.99998 3.09867H7.76103L9.74959 1.10523L8.64162 0L4.76873 3.88238L8.59107 7.76863L9.70681 6.67125L7.73217 4.66359H8.99998C12.7968 4.66359 15.8857 7.7525 15.8857 11.5493C15.8857 15.3462 12.7968 18.4351 8.99998 18.4351C5.20318 18.4351 2.11424 15.3461 2.11424 11.5492V10.7667L0.549316 10.7669V11.5493C0.549316 13.8066 1.42834 15.9287 3.02447 17.5248C4.62057 19.121 6.74275 20 8.99998 20C11.2572 20 13.3794 19.121 14.9755 17.5248C16.5716 15.9287 17.4506 13.8066 17.4506 11.5493C17.4506 9.29211 16.5716 7.16992 14.9755 5.57379Z" />
+                    </svg>
+                  </StyledRefresh>
+                </Grid>
+              </Box>
+              <Box className="withdraw-input-amount">
+                <h4>Withdrawal Amount:</h4>
                 <Input placeholder="Deposit amount" onChange={(e) => setSelect(e.target.value)} initialValue={select} />
                 <h3>BUSD</h3>
               </Box>
+              <Box className="withdraw-input-amount">
+                <h4>Email</h4>
+                <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} initialValue={email} />
+              </Box>
               <Box className="btn-submit">
-                <Button variant="danger">Deposit</Button>
+                <Button variant="danger" disabled={!account}>
+                  Withdraw
+                </Button>
               </Box>
               <Box className="description">
                 <p>You may deposit from € 20 to € 10000. Commission - 0%</p>
@@ -71,7 +86,7 @@ const Deposit: React.FC<React.PropsWithChildren> = () => {
           </StyledBox>
           <Box pb={120} />
         </Container>
-      </StyledDeposit>
+      </StyledWallet>
     </>
   )
 }

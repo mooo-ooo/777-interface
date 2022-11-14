@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useWeb3React } from '@pancakeswap/wagmi'
 import { PageMeta } from 'components/Layout/Page'
 import Container from 'components/Layout/Container'
 import CardBox from 'components/CardBox'
 import { Button } from 'components/Button'
 import { Flex, Grid, Box } from '@pancakeswap/uikit'
 import Input from 'components/Input'
-import { StyledDeposit, StyledBox } from './styles'
+import { StyledWallet, StyledBox } from './styles'
 
 const Deposit: React.FC<React.PropsWithChildren> = () => {
+  const { account } = useWeb3React()
   const router = useRouter()
   const { pathname } = router
   const [select, setSelect] = useState('100')
@@ -18,7 +20,7 @@ const Deposit: React.FC<React.PropsWithChildren> = () => {
   return (
     <>
       <PageMeta />
-      <StyledDeposit>
+      <StyledWallet>
         <Container>
           <h1>Wallet</h1>
           <Flex className="feature-list">
@@ -50,12 +52,14 @@ const Deposit: React.FC<React.PropsWithChildren> = () => {
                   </Box>
                 ))}
               </Grid>
-              <Box className="input-amount">
+              <Box className="deposit-input-amount">
                 <Input placeholder="Deposit amount" onChange={(e) => setSelect(e.target.value)} initialValue={select} />
                 <h3>BUSD</h3>
               </Box>
               <Box className="btn-submit">
-                <Button variant="danger">Deposit</Button>
+                <Button variant="danger" disabled={!account}>
+                  Deposit
+                </Button>
               </Box>
               <Box className="description">
                 <p>You may deposit from € 20 to € 10000. Commission - 0%</p>
@@ -76,7 +80,7 @@ const Deposit: React.FC<React.PropsWithChildren> = () => {
           </StyledBox>
           <Box pb={120} />
         </Container>
-      </StyledDeposit>
+      </StyledWallet>
     </>
   )
 }

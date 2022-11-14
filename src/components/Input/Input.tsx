@@ -73,12 +73,14 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   placeholder?: string
   initialValue?: string
+  disabled?: boolean
 }
 
 const InputText: React.FC<React.PropsWithChildren<Props>> = ({
   onChange: onChangeCallback,
   placeholder = 'Amount',
   initialValue,
+  ...rest
 }) => {
   const [searchText, setSearchText] = useState('')
   const { t } = useTranslation()
@@ -100,7 +102,7 @@ const InputText: React.FC<React.PropsWithChildren<Props>> = ({
 
   return (
     <InputWrapper>
-      <StyledInput value={searchText} onChange={onChange} placeholder={t(placeholder)} />
+      <StyledInput value={searchText} onChange={onChange} placeholder={t(placeholder)} {...rest} />
     </InputWrapper>
   )
 }

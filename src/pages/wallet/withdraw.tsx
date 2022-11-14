@@ -1,7 +1,7 @@
-import { Deposit } from 'views/Wallet'
+import { Withdraw } from 'views/Wallet'
 
-const DepositPage = () => {
-  return <Deposit />
+const WithdrawPage = () => {
+  return <Withdraw />
 }
 
-export default DepositPage
+export default WithdrawPage

@@ -12,15 +12,15 @@ const BaseButton = <E extends ElementType = 'button'>(props: ButtonProps<E>): JS
   const classNames = className ? [className] : []
 
   return (
-    <StyledButton variant={variant} className={classNames.join(' ')}>
-      <Link $isLoading={isLoading} disabled={isDisabled} {...internalProps} {...rest} className={active && 'active'}>
+    <StyledButton variant={variant} className={classNames.join(' ')} disabled={isDisabled}>
+      <Link $isLoading={isLoading} {...internalProps} {...rest} className={active && 'active'}>
         {children}
       </Link>
     </StyledButton>
   )
 }
 
-const StyledButton = styled.div<{ variant: string }>`
+const StyledButton = styled.div<{ variant: string; disabled?: boolean }>`
   position: relative;
   z-index: 10;
   display: flex;
@@ -129,7 +129,8 @@ const StyledButton = styled.div<{ variant: string }>`
       linear-gradient(45deg, transparent 4px, ${({ variant }) => styleVariants[variant].backgroundButton} 0);
     background-size: 20px 100%, calc(100% - 20px) 100%;
     background-position: right 0 top 50%, left 0 bottom 50%;
-    cursor: pointer;
+    cursor: ${({ disabled }) => (disabled ? 'not-allowed;' : 'pointer')};
+    opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
     color: ${({ variant }) => styleVariants[variant].color};
     border-radius: 0;
     text-transform: capitalize;

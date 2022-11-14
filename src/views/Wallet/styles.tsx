@@ -1,7 +1,7 @@
 import { Box } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 
-export const StyledDeposit = styled.main`
+export const StyledWallet = styled.main`
   background-color: #151d24;
   background-image: url(/images/wallet/bg-wallet.jpg);
   position: relative;
@@ -91,10 +91,9 @@ export const StyledBox = styled(Box)`
     width: 90px;
   }
 
-  .input-amount {
+  .deposit-input-amount {
     position: relative;
     padding: 20px 10px 0px 10px;
-
     h3 {
       position: absolute;
       right: 25px;
@@ -102,9 +101,23 @@ export const StyledBox = styled(Box)`
     }
   }
 
+  .withdraw-input-amount {
+    position: relative;
+    padding: 0px 10px;
+
+    h4 {
+      margin-bottom: 8px;
+    }
+    h3 {
+      position: absolute;
+      right: 25px;
+      top: 46px;
+    }
+  }
+
   .btn-submit {
     padding: 0px 10px;
-    width: 300px;
+    max-width: 300px;
     height: 60px;
     margin: auto;
   }
@@ -136,5 +149,17 @@ export const StyledBox = styled(Box)`
     svg {
       margin-right: 6px;
     }
+  }
+`
+
+export const StyledRefresh = styled(Box)`
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-image: url(/images/wallet/box.svg);
+
+  svg {
   }
 `
